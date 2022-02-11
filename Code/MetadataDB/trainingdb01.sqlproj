@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>trainingdb01</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{81250184-960a-45f7-b83c-ed33c7c81eac}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>trainingdb01</RootNamespace>
+    <AssemblyName>trainingdb01</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Scripts" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="workers\" />
+    <Folder Include="workers\Stored Procedures\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Create Worker Procs.sql" />
+    <None Include="Scripts\Add Worker Metadata.sql" />
+    <None Include="Scripts\Sample Worker Metadata.sql" />
+    <None Include="Scripts\Drop User Tables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\BucketLog.sql" />
+    <Build Include="dbo\Tables\BucketProcesses.sql" />
+    <Build Include="dbo\Tables\Buckets.sql" />
+    <Build Include="dbo\Tables\BucketToProcessMap.sql" />
+    <Build Include="dbo\Tables\DataDump.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait480.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait77.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait211.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait345.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait479.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait76.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait210.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait344.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait478.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait75.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait209.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait343.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait477.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait74.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait208.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait342.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait476.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait73.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait207.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait341.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait475.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait72.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait206.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait340.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait474.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait71.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait205.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait339.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait473.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait70.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait204.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait338.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait472.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait69.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait203.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait337.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait471.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait68.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait202.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait336.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait470.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait67.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait201.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait335.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait469.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait66.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait200.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait334.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait468.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait65.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait199.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait333.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait467.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait64.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait198.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait332.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait466.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait63.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait197.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait331.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait465.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait62.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait196.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait330.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait464.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait61.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait195.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait329.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait463.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait60.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait194.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait328.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait462.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait59.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait193.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait327.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait461.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait58.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait192.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait326.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait460.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait57.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait191.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait325.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait459.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait56.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait190.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait324.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait458.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait55.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait189.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait323.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait457.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait54.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait188.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait322.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait456.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait53.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait187.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait321.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait455.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait52.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait186.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait320.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait454.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait51.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait185.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait319.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait453.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait50.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait184.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait318.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait452.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait49.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait183.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait317.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait451.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait48.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait182.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait316.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait450.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait47.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait181.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait315.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait449.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait46.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait180.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait314.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait448.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait45.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait179.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait313.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait447.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait44.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait178.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait312.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait446.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait43.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait177.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait311.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait445.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait42.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait176.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait310.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait444.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait41.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait175.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait309.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait443.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait40.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait174.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait308.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait442.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait39.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait173.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait307.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait441.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait38.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait172.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait306.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait440.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait37.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait171.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait305.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait439.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait36.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait170.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait304.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait438.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait35.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait169.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait303.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait437.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait34.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait168.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait302.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait436.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait33.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait167.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait301.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait435.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait32.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait166.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait300.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait434.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait31.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait165.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait299.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait433.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait30.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait164.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait298.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait432.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait29.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait163.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait297.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait431.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait28.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait162.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait296.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait430.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait27.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait161.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait295.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait429.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait26.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait160.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait294.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait428.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait25.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait159.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait293.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait427.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait24.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait158.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait292.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait426.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait23.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait157.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait291.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait425.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait22.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait156.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait290.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait424.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait21.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait155.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait289.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait423.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait20.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait154.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait288.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait422.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait19.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait153.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait287.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait421.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait18.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait152.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait286.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait420.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait17.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait151.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait285.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait419.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait16.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait150.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait284.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait418.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait15.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait149.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait283.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait417.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait14.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait148.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait282.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait416.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait13.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait147.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait281.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait415.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait12.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait146.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait280.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait414.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait11.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait145.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait279.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait413.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait10.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait144.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait278.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait412.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait9.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait143.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait277.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait411.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait8.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait142.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait276.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait410.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait7.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait141.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait275.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait409.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait6.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait140.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait274.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait408.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait5.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait139.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait273.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait407.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait4.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait138.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait272.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait406.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait3.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait137.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait271.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait405.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait2.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait136.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait270.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait404.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait1.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait135.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait269.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait403.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait134.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait268.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait402.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait133.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait267.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait401.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait132.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait266.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait400.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait131.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait265.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait399.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait130.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait264.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait398.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait129.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait263.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait397.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait128.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait262.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait396.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait127.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait261.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait395.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait126.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait260.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait394.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait125.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait259.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait393.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait124.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait258.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait392.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait123.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait257.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait391.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait122.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait256.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait390.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait121.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait255.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait389.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait120.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait254.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait388.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait119.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait253.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait387.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait118.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait252.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait386.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait117.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait251.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait385.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait116.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait250.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait384.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait115.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait249.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait383.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait114.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait248.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait382.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait113.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait247.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait381.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait112.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait246.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait380.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait111.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait245.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait379.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait110.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait244.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait378.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait109.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait243.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait377.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait108.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait242.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait376.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait107.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait241.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait375.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait106.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait240.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait374.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait105.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait239.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait373.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait104.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait238.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait372.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait103.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait237.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait371.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait102.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait236.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait370.sql" />
+    <Build Include="dbo\Stored Procedures\GetBucketContents.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait101.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait235.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait369.sql" />
+    <Build Include="dbo\Stored Procedures\GetBuckets.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait100.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait234.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait368.sql" />
+    <Build Include="dbo\Stored Procedures\SetBucketLogEntry.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait99.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait233.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait367.sql" />
+    <Build Include="dbo\Stored Procedures\SetBucketProcesses.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait98.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait232.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait366.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait500.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait97.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait231.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait365.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait499.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait96.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait230.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait364.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait498.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait95.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait229.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait363.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait497.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait94.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait228.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait362.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait496.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait93.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait227.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait361.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait495.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait92.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait226.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait360.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait494.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait91.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait225.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait359.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait493.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait90.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait224.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait358.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait492.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait89.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait223.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait357.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait491.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait88.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait222.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait356.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait490.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait87.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait221.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait355.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait489.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait86.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait220.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait354.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait488.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait85.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait219.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait353.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait487.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait84.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait218.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait352.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait486.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait83.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait217.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait351.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait485.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait82.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait216.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait350.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait484.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait81.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait215.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait349.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait483.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait80.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait214.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait348.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait482.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait79.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait213.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait347.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait481.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait78.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait212.sql" />
+    <Build Include="workers\Stored Procedures\DumpDataAndWait346.sql" />
+    <Build Include="Security\workers.sql" />
+    <Build Include="dbo\Tables\FileToUpload.sql" />
+    <Build Include="dbo\Tables\UploadLog.sql" />
+    <Build Include="dbo\Stored Procedures\LogUploadStart.sql" />
+    <Build Include="dbo\Stored Procedures\LogUploadFinish.sql" />
+    <Build Include="Scripts\Scale Out Demo Queries.sql" />
+  </ItemGroup>
+</Project>

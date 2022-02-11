@@ -1,0 +1,3 @@
+ADFPipelineRun 
+| project TimeGenerated, Start, End, ['DataFactory'] = substring(ResourceId, 121, 100), Status, PipelineName , Parameters, ["RunDuration"] = datetime_diff('Minute', End, Start) 
+| where TimeGenerated > ago(1h) and Status !in ('InProgress','Queued','Canceling','Cancelling')

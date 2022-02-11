@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdown", "Markdown", "{F9CE0DCE-E652-4F07-9E69-48695F1E60A4}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "trainingdb01", "MetadataDB\trainingdb01.sqlproj", "{81250184-960A-45F7-B83C-ED33C7C81EAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B787FFB-3D11-4A62-AC32-758FD0F44DFF}
+	EndGlobalSection
+EndGlobal
