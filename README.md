@@ -1,6 +1,6 @@
 # Azure Data Integration Pipelines - Advanced Design & Delivery (A Deep Dive)
 
-## With Paul Andrew
+## _with Paul Andrew_
 
 ![Slide Header](https://raw.githubusercontent.com/mrpaulandrew/Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery/main/Images/Slide%20Header.png)
 
@@ -116,5 +116,6 @@ Paul Andrew is a Microsoft Data Platform MVP and Technical Architect within the 
 ## Speaker Contact Details
 
 ![Contact QR Code](https://raw.githubusercontent.com/mrpaulandrew/Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery/main/Images/Contact.png)
+
 [mrpaulandrew.com/contact](https://mrpaulandrew.com/contact/)
 ___
