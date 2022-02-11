@@ -1,0 +1,19 @@
+{
+	"name": "WranglingOrderAggregation",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "LakeFileOrderDetailLinesParquet",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~>  LakeFileOrderDetailLinesParquet",
+					"dataset": {
+						"referenceName": "LakeFileOrderDetailLinesParquet",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared LakeFileOrderDetailLinesParquet = let\r\n  AdfDoc = Web.Contents(\"https://traininglake01.dfs.core.windows.net/datawarehouse/Raw/OrderDetailLines.parquet?sv=2018-03-28&sig=5R%2BzQI0dTqfGUYi8vVuzKhHq6DBYMX%2FYNyfH4c1BalM%3D&spr=https&se=2020-09-02T12%3A16%3A29Z&srt=sco&ss=bf&sp=rwl\"),\r\n  Parquet = Parquet.Document(AdfDoc)\r\nin\r\n  Parquet;\r\nshared UserQuery = let\r\n  Source = LakeFileOrderDetailLinesParquet\r\nin\r\n  Source;\r\n"
+		}
+	}
+}

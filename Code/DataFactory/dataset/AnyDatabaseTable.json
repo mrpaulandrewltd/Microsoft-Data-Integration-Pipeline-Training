@@ -1,0 +1,43 @@
+{
+	"name": "AnyDatabaseTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AnyDatabaseConnection",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBConnectionSecret": {
+					"value": "@dataset().LinkedServiceConnectionSecret",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"LinkedServiceConnectionSecret": {
+				"type": "string"
+			},
+			"SchemaName": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "SQLDB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

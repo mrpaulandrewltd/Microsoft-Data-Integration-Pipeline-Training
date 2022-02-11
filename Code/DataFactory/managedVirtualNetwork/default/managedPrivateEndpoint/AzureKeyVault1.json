@@ -1,0 +1,10 @@
+{
+	"name": "AzureKeyVault1",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/Training/providers/Microsoft.KeyVault/vaults/TrainingKeys01",
+		"groupId": "vault",
+		"fqdns": [
+			"trainingkeys01.vaultcore.azure.net"
+		]
+	}
+}

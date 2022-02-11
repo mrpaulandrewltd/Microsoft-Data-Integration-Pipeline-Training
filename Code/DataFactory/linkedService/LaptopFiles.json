@@ -1,0 +1,24 @@
+{
+	"name": "LaptopFiles",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\ADFRoot\\",
+			"userId": "ADFIRUser",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "TrainingKeys01",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ADFIRUser"
+			}
+		},
+		"connectVia": {
+			"referenceName": "PaulsLaptopIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

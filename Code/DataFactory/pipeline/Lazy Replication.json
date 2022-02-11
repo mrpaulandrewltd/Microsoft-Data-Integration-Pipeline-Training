@@ -1,0 +1,163 @@
+{
+	"name": "Lazy Replication",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Table List",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@pipeline().parameters.TableLookupQuery",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AnyDatabaseTable",
+						"type": "DatasetReference",
+						"parameters": {
+							"LinkedServiceConnectionSecret": {
+								"value": "@pipeline().parameters.SourceConnectionSecret",
+								"type": "Expression"
+							},
+							"SchemaName": "sys",
+							"TableName": "objects"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Copy Tables",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Table List",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Table List').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy Table",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": {
+										"value": "IF OBJECT_ID('@{item().SchemaName}.@{item().TableName}') IS NOT NULL TRUNCATE TABLE @{item().SchemaName}.@{item().TableName}",
+										"type": "Expression"
+									},
+									"tableOption": "autoCreate",
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "AnyDatabaseTable",
+									"type": "DatasetReference",
+									"parameters": {
+										"LinkedServiceConnectionSecret": {
+											"value": "@pipeline().parameters.SourceConnectionSecret",
+											"type": "Expression"
+										},
+										"SchemaName": {
+											"value": "@item().SchemaName",
+											"type": "Expression"
+										},
+										"TableName": {
+											"value": "@item().TableName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AnyDatabaseTable",
+									"type": "DatasetReference",
+									"parameters": {
+										"LinkedServiceConnectionSecret": {
+											"value": "@pipeline().parameters.TargetConnectionSecret",
+											"type": "Expression"
+										},
+										"SchemaName": {
+											"value": "@item().SchemaName",
+											"type": "Expression"
+										},
+										"TableName": {
+											"value": "@item().TableName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"SourceConnectionSecret": {
+				"type": "string",
+				"defaultValue": "ConnectionString-trainingdb01"
+			},
+			"TargetConnectionSecret": {
+				"type": "string",
+				"defaultValue": "ConnectionString-trainingdb02"
+			},
+			"TableLookupQuery": {
+				"type": "string",
+				"defaultValue": "SELECT \ts.name AS SchemaName, \to.name AS TableName FROM  \tsys.objects o \tINNER JOIN sys.schemas s \t\tON o.schema_id = s.schema_id WHERE  \to.[type] = 'U'"
+			}
+		},
+		"folder": {
+			"name": "Demo Pipelines/Dynamic Linked Services"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-27T09:43:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,15 @@
+{
+	"name": "TrainingFactoryDev",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned,UserAssigned",
+		"principalId": "f818bfb8-5602-4e49-9bd5-81f3855cc81f",
+		"tenantId": "929039b9-c19d-425e-993b-1e3fda155876",
+		"userAssignedIdentities": {
+			"/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourcegroups/Training/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TrainingUMI": {
+				"clientId": "3f2854d7-9e2f-45db-9543-5f42db139e85",
+				"principalId": "05ac2a67-6e10-4eb2-b2fc-28e5d7c0bb91"
+			}
+		}
+	}
+}

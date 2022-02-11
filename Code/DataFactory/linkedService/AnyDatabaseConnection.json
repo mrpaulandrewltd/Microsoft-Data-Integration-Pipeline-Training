@@ -1,0 +1,26 @@
+{
+	"name": "AnyDatabaseConnection",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"DBConnectionSecret": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "TrainingKeys01",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().DBConnectionSecret",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"name": "GetSetMetadata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "trainingdb01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SQLDB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

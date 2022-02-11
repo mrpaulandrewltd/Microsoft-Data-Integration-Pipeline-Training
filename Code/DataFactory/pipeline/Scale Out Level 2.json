@@ -1,0 +1,97 @@
+{
+	"name": "Scale Out Level 2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Bucket Contents",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[dbo].[GetBucketContents]",
+						"storedProcedureParameters": {
+							"BucketId": {
+								"type": "Int32",
+								"value": {
+									"value": "@pipeline().parameters.BucketId",
+									"type": "Expression"
+								}
+							}
+						},
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "GetSetMetadata",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Execute Processes",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Get Bucket Contents",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Bucket Contents').output.value",
+						"type": "Expression"
+					},
+					"batchCount": 50,
+					"activities": [
+						{
+							"name": "Run Process",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": {
+									"value": "@concat('[workers].[DumpDataAndWait',item().ProcessId,']')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "trainingdb01",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"BucketId": {
+				"type": "int"
+			}
+		},
+		"folder": {
+			"name": "Demo Pipelines/Scaling Out"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-24T13:41:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

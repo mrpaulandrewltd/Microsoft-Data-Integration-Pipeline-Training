@@ -1,0 +1,122 @@
+{
+	"name": "LakeFileOrderHeaderParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglake01noneKV",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Lake"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "OrderHeader.parquet",
+				"folderPath": "Raw",
+				"fileSystem": "datawarehouse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "SalesOrderID",
+				"type": "INT32"
+			},
+			{
+				"name": "RevisionNumber",
+				"type": "INT32"
+			},
+			{
+				"name": "OrderDate",
+				"type": "INT96"
+			},
+			{
+				"name": "DueDate",
+				"type": "INT96"
+			},
+			{
+				"name": "ShipDate",
+				"type": "INT96"
+			},
+			{
+				"name": "Status",
+				"type": "INT32"
+			},
+			{
+				"name": "OnlineOrderFlag",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "SalesOrderNumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "PurchaseOrderNumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "AccountNumber",
+				"type": "UTF8"
+			},
+			{
+				"name": "CustomerID",
+				"type": "INT32"
+			},
+			{
+				"name": "ShipToAddressID",
+				"type": "INT32"
+			},
+			{
+				"name": "BillToAddressID",
+				"type": "INT32"
+			},
+			{
+				"name": "ShipMethod",
+				"type": "UTF8"
+			},
+			{
+				"name": "CreditCardApprovalCode",
+				"type": "UTF8"
+			},
+			{
+				"name": "SubTotal",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "TaxAmt",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "Freight",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "TotalDue",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "Comment",
+				"type": "UTF8"
+			},
+			{
+				"name": "rowguid",
+				"type": "UTF8"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

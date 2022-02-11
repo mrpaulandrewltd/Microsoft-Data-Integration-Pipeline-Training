@@ -1,0 +1,68 @@
+{
+	"name": "LakeFileOrderDetailLinesParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglake01noneKV",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Lake"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "OrderDetailLines.parquet",
+				"folderPath": "Raw",
+				"fileSystem": "datawarehouse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "SalesOrderID",
+				"type": "INT32"
+			},
+			{
+				"name": "SalesOrderDetailID",
+				"type": "INT32"
+			},
+			{
+				"name": "OrderQty",
+				"type": "INT32"
+			},
+			{
+				"name": "ProductID",
+				"type": "INT32"
+			},
+			{
+				"name": "UnitPrice",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "UnitPriceDiscount",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "LineTotal",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 6
+			},
+			{
+				"name": "rowguid",
+				"type": "UTF8"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
