@@ -115,9 +115,6 @@ Paul Andrew is a Microsoft Data Platform MVP and Technical Architect within the 
 
 ## Speaker Contact Details
 
-- Email [paul@mrpaulandrew.com](mailto:paul@mrpaulandrew.com)
-- Twitter [@MrPaulAndrew](https://twitter.com/MrPaulAndrew)
-- LinkedIn [In/mrpaulandrew](https://www.linkedin.com/in/mrpaulandrew/)
-- Blog [mrpaulandrew.com](https://mrpaulandrew.com)
-
+![Contact QR Code](https://raw.githubusercontent.com/mrpaulandrew/Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery/main/Images/Contact.png)
+[mrpaulandrew.com/contact](https://mrpaulandrew.com/contact/)
 ___
