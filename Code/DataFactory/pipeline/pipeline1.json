@@ -9,10 +9,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "Wait 10",
+						"referenceName": "05 - Get File List Utility",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": false,
+					"parameters": {
+						"GetFileQuery": "SELECT * FROM [dbo].[FilesToUpload] WHERE [Enabled] = 1;"
+					}
 				}
 			}
 		],
