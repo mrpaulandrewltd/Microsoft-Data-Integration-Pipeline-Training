@@ -53,7 +53,7 @@
 				"typeProperties": {
 					"variableName": "GlobalParam",
 					"value": {
-						"value": "@pipeline().globalParameters.Environment",
+						"value": "@concat(pipeline().globalParameters.Environment,'Test')",
 						"type": "Expression"
 					}
 				}
