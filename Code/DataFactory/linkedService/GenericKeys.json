@@ -10,6 +10,7 @@
 		"annotations": [],
 		"typeProperties": {
 			"baseUrl": "@{linkedService().baseUrl}"
-		}
+		},
+		"description": "https://TrainingKeys01.vault.azure.net"
 	}
 }
