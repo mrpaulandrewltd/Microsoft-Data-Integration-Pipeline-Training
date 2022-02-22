@@ -17,6 +17,26 @@
 						"GetFileQuery": "SELECT * FROM [dbo].[FilesToUpload] WHERE [Enabled] = 1;"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Test",
+					"value": {
+						"value": "@activity('Execute Pipeline1').output.pipelineRunId",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
