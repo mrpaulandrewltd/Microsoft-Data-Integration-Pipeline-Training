@@ -1,0 +1,15 @@
+{
+	"name": "GenericKeys",
+	"properties": {
+		"type": "AzureKeyVault",
+		"parameters": {
+			"baseUrl": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"baseUrl": "@{linkedService().baseUrl}"
+		}
+	}
+}
