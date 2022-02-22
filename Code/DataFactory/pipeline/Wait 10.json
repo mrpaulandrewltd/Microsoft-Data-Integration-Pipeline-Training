@@ -1,0 +1,20 @@
+{
+	"name": "Wait 10",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait 10",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 10
+				}
+			}
+		],
+		"folder": {
+			"name": "Demo Pipelines/Misc"
+		},
+		"annotations": []
+	}
+}
