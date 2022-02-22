@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Execute Pipeline1",
+				"name": "06 - Get Any File List",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
@@ -19,11 +19,11 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "Set Pipe Output",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Execute Pipeline1",
+						"activity": "06 - Get Any File List",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -31,16 +31,39 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "Test",
+					"variableName": "WorkerOutput",
 					"value": {
-						"value": "@activity('Execute Pipeline1').output.pipelineRunId",
+						"value": "@activity('06 - Get Any File List').output.pipelineRunId",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Global Param",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "06 - Get Any File List",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "GlobalParam",
+					"value": {
+						"value": "@pipeline().globalParameters.Environment",
 						"type": "Expression"
 					}
 				}
 			}
 		],
 		"variables": {
-			"Test": {
+			"WorkerOutput": {
+				"type": "String"
+			},
+			"GlobalParam": {
 				"type": "String"
 			}
 		},
