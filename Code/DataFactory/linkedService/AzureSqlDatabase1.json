@@ -1,0 +1,18 @@
+{
+	"name": "AzureSqlDatabase1",
+	"properties": {
+		"type": "AzureSqlDatabase",
+		"annotations": [],
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "@{linkedService().KeyVaultName}",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ConnectionString-trainingdb01"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
+}
