@@ -1,5 +1,13 @@
 {
 	"name": "TrainingFactoryDev",
+	"properties": {
+		"globalParameters": {
+			"Environment": {
+				"type": "string",
+				"value": "Dev"
+			}
+		}
+	},
 	"location": "uksouth",
 	"identity": {
 		"type": "SystemAssigned,UserAssigned",
