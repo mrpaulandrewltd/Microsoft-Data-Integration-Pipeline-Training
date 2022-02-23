@@ -41,7 +41,7 @@
 				"typeProperties": {
 					"variableName": "CompleteSecretURL",
 					"value": {
-						"value": "@concat('https://trainingkeys01.vault.azure.net/secrets/',pipeline().parameters.SecretName,'?api-version=7.0')",
+						"value": "@concat(\n'https://',\npipeline().globalParameters.KeyVaultName,\n'.vault.azure.net/secrets/',\npipeline().parameters.SecretName,\n'?api-version=7.0')",
 						"type": "Expression"
 					}
 				}
