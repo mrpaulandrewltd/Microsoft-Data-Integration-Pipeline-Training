@@ -5,6 +5,10 @@
 			"Environment": {
 				"type": "string",
 				"value": "Dev"
+			},
+			"KeyVaultName": {
+				"type": "string",
+				"value": "trainingkeys01"
 			}
 		}
 	},
