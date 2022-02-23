@@ -45,6 +45,38 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AnyDatabaseTableAnyKeyVault",
+						"type": "DatasetReference",
+						"parameters": {
+							"LinkedServiceConnectionSecret": "ConnectionString-trainingdb01",
+							"SchemaName": "dbo",
+							"KeyVaultURL": {
+								"value": "@concat('https://',pipeline().globalParameters.KeyVaultName,'.vault.azure.net/')",
+								"type": "Expression"
+							}
+						}
+					}
+				}
 			}
 		],
 		"parameters": {
