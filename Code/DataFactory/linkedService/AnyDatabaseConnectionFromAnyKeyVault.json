@@ -1,0 +1,34 @@
+{
+	"name": "AnyDatabaseConnectionFromAnyKeyVault",
+	"properties": {
+		"parameters": {
+			"KeyVaultURL": {
+				"type": "string"
+			},
+			"KeyVaultSecretName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "GenericKeys",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"baseUrl": {
+							"value": "@linkedService().KeyVaultURL",
+							"type": "Expression"
+						}
+					}
+				},
+				"secretName": {
+					"value": "@linkedService().KeyVaultSecretName",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}
