@@ -1,6 +1,63 @@
 {
 	"name": "Get Key Vault Value",
 	"properties": {
+		"activities": [
+			{
+				"name": "Get Secret",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Set Key URL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@variables('CompleteSecretURL')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Set Key URL",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CompleteSecretURL",
+					"value": {
+						"value": "@concat('https://trainingkeys01.vault.azure.net/secrets/',pipeline().parameters.SecretName,'?api-version=7.0')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"SecretName": {
+				"type": "string",
+				"defaultValue": "DemoKeyGetWithWebActivity"
+			}
+		},
+		"variables": {
+			"CompleteSecretURL": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "Demo Pipelines/Misc"
 		},
