@@ -1,0 +1,9 @@
+{
+	"name": "Get Key Vault Value",
+	"properties": {
+		"folder": {
+			"name": "Demo Pipelines/Misc"
+		},
+		"annotations": []
+	}
+}
