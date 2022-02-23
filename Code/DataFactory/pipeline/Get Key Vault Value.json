@@ -47,9 +47,16 @@
 				}
 			},
 			{
-				"name": "Lookup1",
+				"name": "Nested Key Vault URL",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Get Secret",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -69,7 +76,8 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"LinkedServiceConnectionSecret": "ConnectionString-trainingdb01",
-							"SchemaName": "dbo",
+							"SchemaName": "sys",
+							"TableName": "objects",
 							"KeyVaultURL": {
 								"value": "@concat('https://',pipeline().globalParameters.KeyVaultName,'.vault.azure.net/')",
 								"type": "Expression"
