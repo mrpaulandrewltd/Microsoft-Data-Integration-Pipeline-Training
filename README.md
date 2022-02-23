@@ -81,8 +81,10 @@ The following offers an insight into the complete agenda and module breakdown fo
   * Firewall Bypass
 
 * __Module 8:__ [Security]()
-  * Managed Identities vs Service Principals
-  * Azure Key Vault Backing
+  * Service Principals
+  * Managed Identities
+  * Azure Key Vault Integration
+  * Customer Managed Keys
   * Pipeline Access & Permissions
 
 * __Module 9:__ [Monitoring & Alerting]()
