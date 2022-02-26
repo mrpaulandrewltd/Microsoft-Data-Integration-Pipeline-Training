@@ -83,7 +83,7 @@
 														"type": "DelimitedTextSource",
 														"storeSettings": {
 															"type": "FileServerReadSettings",
-															"recursive": true,
+															"recursive": false,
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -165,7 +165,8 @@
 												"type": "BinarySource",
 												"storeSettings": {
 													"type": "AzureBlobFSReadSettings",
-													"recursive": true
+													"recursive": false,
+													"deleteFilesAfterCompletion": false
 												},
 												"formatSettings": {
 													"type": "BinaryReadSettings"
