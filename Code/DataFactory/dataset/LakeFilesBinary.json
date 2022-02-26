@@ -1,0 +1,19 @@
+{
+	"name": "LakeFilesBinary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "traininglak01",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Lake"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			}
+		}
+	}
+}
