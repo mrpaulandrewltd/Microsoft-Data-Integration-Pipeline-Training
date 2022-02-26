@@ -164,9 +164,8 @@
 											"source": {
 												"type": "BinarySource",
 												"storeSettings": {
-													"type": "AzureBlobFSReadSettings",
-													"recursive": false,
-													"deleteFilesAfterCompletion": false
+													"type": "FileServerReadSettings",
+													"recursive": false
 												},
 												"formatSettings": {
 													"type": "BinaryReadSettings"
@@ -182,7 +181,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "LakeFilesBinary",
+												"referenceName": "LaptopFilesBinary",
 												"type": "DatasetReference",
 												"parameters": {
 													"Directory": {
