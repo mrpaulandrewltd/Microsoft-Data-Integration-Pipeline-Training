@@ -81,6 +81,40 @@
 												"typeProperties": {
 													"source": {
 														"type": "DelimitedTextSource",
+														"additionalColumns": [
+															{
+																"name": "FilePath",
+																"value": "$$FILEPATH"
+															},
+															{
+																"name": "Environment",
+																"value": {
+																	"value": "@pipeline().globalParameters.Environment",
+																	"type": "Expression"
+																}
+															},
+															{
+																"name": "PipelineName",
+																"value": {
+																	"value": "@pipeline().Pipeline",
+																	"type": "Expression"
+																}
+															},
+															{
+																"name": "RunId",
+																"value": {
+																	"value": "@pipeline().RunId",
+																	"type": "Expression"
+																}
+															},
+															{
+																"name": "RunDate",
+																"value": {
+																	"value": "@utcnow()",
+																	"type": "Expression"
+																}
+															}
+														],
 														"storeSettings": {
 															"type": "FileServerReadSettings",
 															"recursive": false,
