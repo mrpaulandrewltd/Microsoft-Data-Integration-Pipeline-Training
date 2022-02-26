@@ -53,118 +53,7 @@
 					},
 					"activities": [
 						{
-							"name": "Upload File",
-							"type": "Copy",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "DelimitedTextSource",
-									"additionalColumns": [
-										{
-											"name": "FilePath",
-											"value": "$$FILEPATH"
-										},
-										{
-											"name": "DataFactoryName",
-											"value": {
-												"value": "@pipeline().DataFactory",
-												"type": "Expression"
-											}
-										},
-										{
-											"name": "PipelineName",
-											"value": {
-												"value": "@pipeline().Pipeline",
-												"type": "Expression"
-											}
-										},
-										{
-											"name": "UploadDateTime",
-											"value": {
-												"value": "@utcnow()",
-												"type": "Expression"
-											}
-										},
-										{
-											"name": "RunId",
-											"value": {
-												"value": "@pipeline().RunId",
-												"type": "Expression"
-											}
-										}
-									],
-									"storeSettings": {
-										"type": "FileServerReadSettings",
-										"recursive": true
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
-									}
-								},
-								"sink": {
-									"type": "DelimitedTextSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
-									}
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "LaptopsFiles",
-									"type": "DatasetReference",
-									"parameters": {
-										"Directory": {
-											"value": "@item().SourceDirectory",
-											"type": "Expression"
-										},
-										"File": {
-											"value": "@item().FileName",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "LakeFiles",
-									"type": "DatasetReference",
-									"parameters": {
-										"Directory": {
-											"value": "@item().TargetDirectory",
-											"type": "Expression"
-										},
-										"File": {
-											"value": "@item().FileName",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						},
-						{
-							"name": "Switch1",
+							"name": "Copy By File Type",
 							"type": "Switch",
 							"dependsOn": [],
 							"userProperties": [],
@@ -173,7 +62,157 @@
 									"value": "@substring(item().FileName,add(indexof(item().FileName,'.'),1),sub(length(item().FileName),add(indexof(item().FileName,'.'),1)))",
 									"type": "Expression"
 								},
-								"cases": []
+								"cases": [
+									{
+										"value": "csv",
+										"activities": [
+											{
+												"name": "CSV Copy",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "FileServerReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobFSWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "LaptopsFiles",
+														"type": "DatasetReference",
+														"parameters": {
+															"Directory": {
+																"value": "@item().SourceDirectory",
+																"type": "Expression"
+															},
+															"File": {
+																"value": "@item().FileName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "LakeFiles",
+														"type": "DatasetReference",
+														"parameters": {
+															"Directory": {
+																"value": "@item().TargetDirectory",
+																"type": "Expression"
+															},
+															"File": {
+																"value": "@item().FileName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								],
+								"defaultActivities": [
+									{
+										"name": "Binary Copy",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "BinarySource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true
+												},
+												"formatSettings": {
+													"type": "BinaryReadSettings"
+												}
+											},
+											"sink": {
+												"type": "BinarySink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												}
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "LakeFilesBinary",
+												"type": "DatasetReference",
+												"parameters": {
+													"Directory": {
+														"value": "@item().SourceDirectory",
+														"type": "Expression"
+													},
+													"File": {
+														"value": "@item().FileName",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "LakeFilesBinary",
+												"type": "DatasetReference",
+												"parameters": {
+													"Directory": {
+														"value": "@item().TargetDirectory",
+														"type": "Expression"
+													},
+													"File": {
+														"value": "@item().FileName",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								]
 							}
 						}
 					]
