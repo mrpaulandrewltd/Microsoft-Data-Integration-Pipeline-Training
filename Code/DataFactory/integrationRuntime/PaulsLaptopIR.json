@@ -4,7 +4,7 @@
 		"type": "SelfHosted",
 		"typeProperties": {
 			"linkedInfo": {
-				"resourceId": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WorkLaptop",
+				"resourceId": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV",
 				"authorizationType": "Rbac"
 			}
 		}
