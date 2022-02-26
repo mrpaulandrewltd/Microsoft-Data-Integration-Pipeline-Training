@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdown", "Markdown", "{F9
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "trainingdb01", "MetadataDB\trainingdb01.sqlproj", "{81250184-960A-45F7-B83C-ED33C7C81EAC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomActivity", "CustomActivity\CustomActivity.csproj", "{2A28FF1B-86E0-4B2F-94CB-E89914B50CE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81250184-960A-45F7-B83C-ED33C7C81EAC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2A28FF1B-86E0-4B2F-94CB-E89914B50CE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A28FF1B-86E0-4B2F-94CB-E89914B50CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A28FF1B-86E0-4B2F-94CB-E89914B50CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A28FF1B-86E0-4B2F-94CB-E89914B50CE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

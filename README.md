@@ -88,7 +88,7 @@ The following offers an insight into the complete agenda and module breakdown fo
   * Pipeline Access & Permissions
 
 * __Module 9:__ [Monitoring & Alerting]()
-    * Portal Monitoring
+    * Studio Monitoring
     * Log Analytics & Kusto Queries
     * Operational Dashboards
     * Advanced Alerting
