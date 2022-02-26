@@ -1,0 +1,1013 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "TrainingFactoryDev"
+		},
+		"TrainingStore01_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TrainingStore01'"
+		},
+		"traininglak01_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'traininglak01'"
+		},
+		"traininglake01noneKV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'traininglake01noneKV'"
+		},
+		"GenericKeys_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "@{linkedService().baseUrl}"
+		},
+		"TrainingKeys01_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://TrainingKeys01.vault.azure.net/"
+		},
+		"traininglak01_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://traininglake01.dfs.core.windows.net"
+		},
+		"traininglake01noneKV_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://traininglake01.dfs.core.windows.net"
+		},
+		"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
+		},
+		"AnyDatabaseConnection_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "@linkedService().DBConnectionSecret"
+		},
+		"AnyDatabaseConnectionFromAnyKeyVault_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "@linkedService().KeyVaultSecretName"
+		},
+		"BatchForTraining01_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://batchfortraining01.uksouth.batch.azure.com"
+		},
+		"BatchForTraining01_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "09a2ec47-0cc8-4492-935c-04852e3ec654"
+		},
+		"BatchForTraining01_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "batchfortraining01"
+		},
+		"LaptopFiles_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\ADFRoot\\"
+		},
+		"LaptopFiles_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "ADFIRUser"
+		},
+		"TrainingKeys01withUMI_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://TrainingKeys01.vault.azure.net/"
+		},
+		"trainingdb01_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "ConnectionString-trainingdb01"
+		},
+		"traininglake01_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://traininglake01.dfs.core.windows.net"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/1950 Activities')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "50",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@json('[\"1\",\n\"2\",\n\"3\",\n\"4\",\n\"5\",\n\"6\",\n\"7\",\n\"8\",\n\"9\",\n\"10\",\n\"11\",\n\"12\",\n\"13\",\n\"14\",\n\"15\",\n\"16\",\n\"17\",\n\"18\",\n\"19\",\n\"20\",\n\"21\",\n\"22\",\n\"23\",\n\"24\",\n\"25\",\n\"26\",\n\"27\",\n\"28\",\n\"29\",\n\"30\",\n\"31\",\n\"32\",\n\"33\",\n\"34\",\n\"35\",\n\"36\",\n\"37\",\n\"38\",\n\"39\",\n\"40\",\n\"41\",\n\"42\",\n\"43\",\n\"44\",\n\"45\",\n\"46\",\n\"47\",\n\"48\",\n\"49\",\n\"50\"]\n')",
+								"type": "Expression"
+							},
+							"batchCount": 50,
+							"activities": [
+								{
+									"name": "Wait 1 Minute 1",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 2",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 3",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 4",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 5",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 6",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 7",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 8",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 9",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 10",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 11",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 12",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 13",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 14",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 15",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 16",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 17",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 18",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 19",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 20",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 21",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 22",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 23",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 24",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 25",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 26",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 27",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 28",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 29",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 30",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 31",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 32",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 33",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 34",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 35",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 36",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 37",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 38",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								},
+								{
+									"name": "Wait 1 Minute 39",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 600
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Misc"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-02-03T14:39:03Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Wait 10')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait 10",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 10
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Misc"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GenericKeys')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "https://TrainingKeys01.vault.azure.net",
+				"parameters": {
+					"baseUrl": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('GenericKeys_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TrainingKeys01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('TrainingKeys01_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TrainingStore01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('TrainingStore01_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/traininglak01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('traininglak01_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('traininglak01_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/traininglake01noneKV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('traininglake01noneKV_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('traininglake01noneKV_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ForDataFlowDemos')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "UK South",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 240
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PaulsLaptopIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {
+					"linkedInfo": {
+						"resourceId": "[parameters('PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId')]",
+						"authorizationType": "Rbac"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TrainingCredential01')]",
+			"type": "Microsoft.DataFactory/factories/credentials",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "ManagedIdentity",
+				"typeProperties": {
+					"resourceId": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/Training/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TrainingUMI"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+			"apiVersion": "2018-06-01",
+			"properties": {},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFileOrderDetailLinesParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01noneKV",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "OrderDetailLines.parquet",
+						"folderPath": "Raw",
+						"fileSystem": "datawarehouse"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "SalesOrderID",
+						"type": "INT32"
+					},
+					{
+						"name": "SalesOrderDetailID",
+						"type": "INT32"
+					},
+					{
+						"name": "OrderQty",
+						"type": "INT32"
+					},
+					{
+						"name": "ProductID",
+						"type": "INT32"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "UnitPriceDiscount",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LineTotal",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 6
+					},
+					{
+						"name": "rowguid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/traininglake01noneKV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFileOrderHeaderParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01noneKV",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "OrderHeader.parquet",
+						"folderPath": "Raw",
+						"fileSystem": "datawarehouse"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "SalesOrderID",
+						"type": "INT32"
+					},
+					{
+						"name": "RevisionNumber",
+						"type": "INT32"
+					},
+					{
+						"name": "OrderDate",
+						"type": "INT96"
+					},
+					{
+						"name": "DueDate",
+						"type": "INT96"
+					},
+					{
+						"name": "ShipDate",
+						"type": "INT96"
+					},
+					{
+						"name": "Status",
+						"type": "INT32"
+					},
+					{
+						"name": "OnlineOrderFlag",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "SalesOrderNumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "PurchaseOrderNumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "AccountNumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "CustomerID",
+						"type": "INT32"
+					},
+					{
+						"name": "ShipToAddressID",
+						"type": "INT32"
+					},
+					{
+						"name": "BillToAddressID",
+						"type": "INT32"
+					},
+					{
+						"name": "ShipMethod",
+						"type": "UTF8"
+					},
+					{
+						"name": "CreditCardApprovalCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "SubTotal",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "TaxAmt",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "Freight",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "TotalDue",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "Comment",
+						"type": "UTF8"
+					},
+					{
+						"name": "rowguid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/traininglake01noneKV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AnyDatabaseConnection')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"DBConnectionSecret": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "TrainingKeys01",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": {
+							"value": "[parameters('AnyDatabaseConnection_properties_typeProperties_connectionString_secretName')]",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AnyDatabaseConnectionFromAnyKeyVault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"KeyVaultURL": {
+						"type": "string"
+					},
+					"KeyVaultSecretName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "GenericKeys",
+							"type": "LinkedServiceReference",
+							"parameters": {
+								"baseUrl": {
+									"value": "@linkedService().KeyVaultURL",
+									"type": "Expression"
+								}
+							}
+						},
+						"secretName": {
+							"value": "[parameters('AnyDatabaseConnectionFromAnyKeyVault_properties_typeProperties_connectionString_secretName')]",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/GenericKeys')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BatchForTraining01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBatch",
+				"typeProperties": {
+					"batchUri": "[parameters('BatchForTraining01_properties_typeProperties_batchUri')]",
+					"poolName": "[parameters('BatchForTraining01_properties_typeProperties_poolName')]",
+					"accountName": "[parameters('BatchForTraining01_properties_typeProperties_accountName')]",
+					"linkedServiceName": {
+						"referenceName": "TrainingStore01",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/TrainingStore01')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LaptopFiles')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('LaptopFiles_properties_typeProperties_host')]",
+					"userId": "[parameters('LaptopFiles_properties_typeProperties_userId')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "TrainingKeys01",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "ADFIRUser"
+					}
+				},
+				"connectVia": {
+					"referenceName": "PaulsLaptopIR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/PaulsLaptopIR')]",
+				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TrainingKeys01withUMI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('TrainingKeys01withUMI_properties_typeProperties_baseUrl')]",
+					"credential": {
+						"referenceName": "TrainingCredential01",
+						"type": "CredentialReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/credentials/TrainingCredential01')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trainingdb01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "TrainingKeys01",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('trainingdb01_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/traininglake01')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('traininglake01_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "TrainingKeys01",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "traininglake01"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
+			]
+		}
+	]
+}
