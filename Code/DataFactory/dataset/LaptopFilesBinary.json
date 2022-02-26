@@ -1,8 +1,8 @@
 {
-	"name": "LakeFilesBinary",
+	"name": "LaptopFilesBinary",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "traininglake01",
+			"referenceName": "LaptopFiles",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -14,13 +14,13 @@
 			}
 		},
 		"folder": {
-			"name": "Lake"
+			"name": "Laptop"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
+				"type": "FileServerLocation",
 				"fileName": {
 					"value": "@dataset().File",
 					"type": "Expression"
@@ -28,8 +28,7 @@
 				"folderPath": {
 					"value": "@dataset().Directory",
 					"type": "Expression"
-				},
-				"fileSystem": "datawarehouse"
+				}
 			}
 		}
 	}

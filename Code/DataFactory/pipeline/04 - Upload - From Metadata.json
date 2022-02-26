@@ -162,6 +162,19 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Switch1",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@substring(item().FileName,add(indexof(item().FileName,'.'),1),sub(length(item().FileName),add(indexof(item().FileName,'.'),1)))",
+									"type": "Expression"
+								},
+								"cases": []
+							}
 						}
 					]
 				}
