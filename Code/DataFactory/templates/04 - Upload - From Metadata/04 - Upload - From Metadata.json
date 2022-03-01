@@ -1,0 +1,725 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		},
+		"trainingdb01": {
+			"type": "string"
+		},
+		"LaptopFiles": {
+			"type": "string"
+		},
+		"traininglake01": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/04 - Upload - From Metadata')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get File List",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT * FROM [dbo].[FilesToUpload] WHERE [Enabled] = 1;",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "GetSetMetadata",
+								"type": "DatasetReference"
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "UploadFiles",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Get File List",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Log Upload Start",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get File List').output.value",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy By File Type",
+									"type": "Switch",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"on": {
+											"value": "@substring(item().FileName,add(indexof(item().FileName,'.'),1),sub(length(item().FileName),add(indexof(item().FileName,'.'),1)))",
+											"type": "Expression"
+										},
+										"cases": [
+											{
+												"value": "csv",
+												"activities": [
+													{
+														"name": "CSV Copy",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"additionalColumns": [
+																	{
+																		"name": "FilePath",
+																		"value": "$$FILEPATH"
+																	},
+																	{
+																		"name": "Environment",
+																		"value": {
+																			"value": "@pipeline().globalParameters.Environment",
+																			"type": "Expression"
+																		}
+																	},
+																	{
+																		"name": "PipelineName",
+																		"value": {
+																			"value": "@pipeline().Pipeline",
+																			"type": "Expression"
+																		}
+																	},
+																	{
+																		"name": "RunId",
+																		"value": {
+																			"value": "@pipeline().RunId",
+																			"type": "Expression"
+																		}
+																	},
+																	{
+																		"name": "RunDate",
+																		"value": {
+																			"value": "@utcnow()",
+																			"type": "Expression"
+																		}
+																	}
+																],
+																"storeSettings": {
+																	"type": "FileServerReadSettings",
+																	"recursive": false,
+																	"enablePartitionDiscovery": false
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "DelimitedTextSink",
+																"storeSettings": {
+																	"type": "AzureBlobFSWriteSettings"
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextWriteSettings",
+																	"quoteAllText": true,
+																	"fileExtension": ".txt"
+																}
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"typeConversion": true,
+																"typeConversionSettings": {
+																	"allowDataTruncation": true,
+																	"treatBooleanAsNumber": false
+																}
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "LaptopsFiles",
+																"type": "DatasetReference",
+																"parameters": {
+																	"Directory": {
+																		"value": "@item().SourceDirectory",
+																		"type": "Expression"
+																	},
+																	"File": {
+																		"value": "@item().FileName",
+																		"type": "Expression"
+																	}
+																}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "LakeFiles",
+																"type": "DatasetReference",
+																"parameters": {
+																	"Directory": {
+																		"value": "@item().TargetDirectory",
+																		"type": "Expression"
+																	},
+																	"File": {
+																		"value": "@item().FileName",
+																		"type": "Expression"
+																	}
+																}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "parquet",
+												"activities": [
+													{
+														"name": "Parquet Copy",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "ParquetSource",
+																"storeSettings": {
+																	"type": "FileServerReadSettings",
+																	"recursive": false,
+																	"enablePartitionDiscovery": false
+																}
+															},
+															"sink": {
+																"type": "ParquetSink",
+																"storeSettings": {
+																	"type": "AzureBlobFSWriteSettings"
+																},
+																"formatSettings": {
+																	"type": "ParquetWriteSettings"
+																}
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"typeConversion": true,
+																"typeConversionSettings": {
+																	"allowDataTruncation": true,
+																	"treatBooleanAsNumber": false
+																}
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "LaptopFilesParquet",
+																"type": "DatasetReference",
+																"parameters": {
+																	"Directory": {
+																		"value": "@item().SourceDirectory",
+																		"type": "Expression"
+																	},
+																	"File": {
+																		"value": "@item().FileName",
+																		"type": "Expression"
+																	}
+																}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "LakeFileParquet",
+																"type": "DatasetReference",
+																"parameters": {
+																	"Directory": {
+																		"value": "@item().TargetDirectory",
+																		"type": "Expression"
+																	},
+																	"File": {
+																		"value": "@item().FileName",
+																		"type": "Expression"
+																	}
+																}
+															}
+														]
+													}
+												]
+											}
+										],
+										"defaultActivities": [
+											{
+												"name": "Binary Copy",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "BinarySource",
+														"storeSettings": {
+															"type": "FileServerReadSettings",
+															"recursive": false
+														},
+														"formatSettings": {
+															"type": "BinaryReadSettings"
+														}
+													},
+													"sink": {
+														"type": "BinarySink",
+														"storeSettings": {
+															"type": "AzureBlobFSWriteSettings"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "LaptopFilesBinary",
+														"type": "DatasetReference",
+														"parameters": {
+															"Directory": {
+																"value": "@item().SourceDirectory",
+																"type": "Expression"
+															},
+															"File": {
+																"value": "@item().FileName",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "LakeFilesBinary",
+														"type": "DatasetReference",
+														"parameters": {
+															"Directory": {
+																"value": "@item().TargetDirectory",
+																"type": "Expression"
+															},
+															"File": {
+																"value": "@item().FileName",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Log Upload Start",
+						"type": "Lookup",
+						"dependsOn": [
+							{
+								"activity": "Get File List",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderStoredProcedureName": "[[dbo].[LogUploadStart]",
+								"storedProcedureParameters": {
+									"FileCount": {
+										"type": "Int32",
+										"value": {
+											"value": "@activity('Get File List').output.count",
+											"type": "Expression"
+										}
+									},
+									"TriggerId": {
+										"type": "String",
+										"value": {
+											"value": "@pipeline().TriggerId",
+											"type": "Expression"
+										}
+									}
+								},
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "GetSetMetadata",
+								"type": "DatasetReference"
+							}
+						}
+					},
+					{
+						"name": "Log Upload Finish",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "UploadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[LogUploadFinish]",
+							"storedProcedureParameters": {
+								"LogId": {
+									"value": {
+										"value": "@activity('Log Upload Start').output.firstRow.LogId",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "[parameters('trainingdb01')]",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"variables": {
+					"DemoVariable": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Data Uploads"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-02T14:13:14Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/GetSetMetadata')]",
+				"[concat(variables('factoryId'), '/datasets/LaptopFilesBinary')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFilesBinary')]",
+				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFiles')]",
+				"[concat(variables('factoryId'), '/datasets/LaptopFilesParquet')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFileParquet')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GetSetMetadata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('trainingdb01')]",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SQLDB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LaptopFilesBinary')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('LaptopFiles')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Laptop"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFilesBinary')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('traininglake01')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": "datawarehouse"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LaptopsFiles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('LaptopFiles')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Laptop"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFiles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('traininglake01')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": "datawarehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LaptopFilesParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('LaptopFiles')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Laptop"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						}
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFileParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('traininglake01')]",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": "datawarehouse"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		}
+	]
+}
