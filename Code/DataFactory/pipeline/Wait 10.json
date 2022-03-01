@@ -3,12 +3,12 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Wait 10",
+				"name": "Wait 15",
 				"type": "Wait",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": 10
+					"waitTimeInSeconds": 15
 				}
 			}
 		],
