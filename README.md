@@ -41,6 +41,8 @@ The following offers an insight into the complete agenda and module breakdown fo
   * Common Activities
   * Execution Dependencies
 
+___
+
 * __Module 2:__ [Integration Runtime Design Patterns]()
   * Compute Types
     * Azure
@@ -48,17 +50,23 @@ The following offers an insight into the complete agenda and module breakdown fo
     * SSIS
   * Patterns & Configuration
 
+___
+
 * __Module 3:__ [Data Transformation]()
   * Data Flows
   * Power Query Injection
   * Spark Configuration
   * Use Cases
 
+___
+
 * __Module 4:__ [Dynamic Pipelines]()
   * Expressions & Interpolation
   * Simple Metadata Driven Execution
   * Dynamic Content Chains
   * Reference Names
+
+___
 
 * __Module 5:__ [Pipeline Extensibility]()
   * Azure Batch Service
@@ -69,16 +77,22 @@ The following offers an insight into the complete agenda and module breakdown fo
   * Azure Management API
   * Azure Functions 
 
+___
+
 * __Module 6:__ [Execution Parallelism]()
   * Control Flow Scale Out
   * Concurrency Limitations
   * Internal vs External Activities
   * Orchestration Framework - [procfwk.com](http://procfwk.com/)
 
+___
+
 * __Module 7:__ [VNet Integration]()
   * Private Endpoints
   * Managed VNet's
   * Firewall Bypass
+
+___
 
 * __Module 8:__ [Security]()
   * Service Principals
@@ -86,6 +100,8 @@ The following offers an insight into the complete agenda and module breakdown fo
   * Azure Key Vault Integration
   * Customer Managed Keys
   * Pipeline Access & Permissions
+
+___
 
 * __Module 9:__ [Monitoring & Alerting]()
     * Studio Monitoring
@@ -98,11 +114,15 @@ The following offers an insight into the complete agenda and module breakdown fo
     * Test Coverage
     * NUnit Tests
 
+___
+
 * __Module 11:__ [CI/CD]()
     * Source Control vs Developer UI
     * Basic ARM Template Deployments
     * Advanced Deployment Patterns
-        
+
+___
+
 * __Module 12:__ [Final Thoughts]()
   * Running Costs
   * Conclusions
