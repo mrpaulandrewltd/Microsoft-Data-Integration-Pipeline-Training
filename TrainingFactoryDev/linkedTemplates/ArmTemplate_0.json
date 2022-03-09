@@ -74,10 +74,6 @@
 		"trainingdb01_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "ConnectionString-trainingdb01"
-		},
-		"traininglake01_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://traininglake01.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -629,6 +625,30 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LakeFileOrderDetailLinesParquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -979,29 +999,6 @@
 							"type": "LinkedServiceReference"
 						},
 						"secretName": "[parameters('trainingdb01_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/traininglake01')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('traininglake01_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "TrainingKeys01",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "traininglake01"
 					}
 				}
 			},

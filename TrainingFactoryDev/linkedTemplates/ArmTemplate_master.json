@@ -170,9 +170,6 @@
 					},
 					"trainingdb01_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('trainingdb01_properties_typeProperties_connectionString_secretName')]"
-					},
-					"traininglake01_properties_typeProperties_url": {
-						"value": "[parameters('traininglake01_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -191,6 +188,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"traininglake01_properties_typeProperties_url": {
+						"value": "[parameters('traininglake01_properties_typeProperties_url')]"
 					},
 					"AzureKeyVault1_properties_privateLinkResourceId": {
 						"value": "[parameters('AzureKeyVault1_properties_privateLinkResourceId')]"
