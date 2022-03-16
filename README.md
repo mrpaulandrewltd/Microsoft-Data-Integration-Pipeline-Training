@@ -1,6 +1,5 @@
-# Azure Data Integration Pipelines
-## Advanced Design & Delivery (A Deep Dive)
-### _with Paul Andrew_
+# Azure Data Integration Pipeline Training
+## _with Paul Andrew_
 
 ![Slide Header](https://raw.githubusercontent.com/mrpaulandrew/Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery/main/Images/Slide%20Header.png)
 
