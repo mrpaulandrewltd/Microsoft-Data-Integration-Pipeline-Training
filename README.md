@@ -1,7 +1,7 @@
 # Azure Data Integration Pipeline Training
 ## _with Paul Andrew_
 
-![Slide Header](https://raw.githubusercontent.com/mrpaulandrew/Azure-Data-Integration-Pipeline-Training/main/Images/ReadMe%20Header.png)
+![Slide Header](./Images/ReadMe%20Header.png)
 
 Hey friends and welcome to my training workshops on __Azure Data Integration Pipelines__. 
 
@@ -23,11 +23,11 @@ ___
 
 ## Speaker Biography
 
-Paul Andrew is a Microsoft Data Platform MVP and Technical Architect within the Avanade Centre of Excellence team, with over 15 years' experience in the industry, working as an engineer and solution architect. Day-to-day Paul is accountable for delivering enterprise grade data insights to international organisations where he wields the complete stack of Azure Data Platform resources. Paul leads delivery teams around the globe implementing the latest design patterns, creating architectural innovations, and defining best practice to ensure technical excellence for customers across a wide variety of industry verticals. Paul is passionate about technology, which is demonstrated in the community, he speaks at events and shares his knowledge gained from real world experience through his blog. Paul maintains the view that his job is also his hobby and doesn’t ever want to take his fingers off the developer’s keyboard while maintaining a growth mindset.
+Paul Andrew is a Microsoft Data Platform MVP and Technical Architect within the Avanade Centre of Excellence team, with over 15 years' experience in the industry, working as an engineer and solution architect. Day-to-day Paul is accountable for delivering enterprise grade data insights to international organisations where he wields the complete stack of Azure Data Platform resources. Paul leads delivery teams around the globe implementing the latest design patterns, creating architectural innovations, and defining best practice to ensure technical excellence for customers across a wide variety of industry verticals. Paul is passionate about technology, which is demonstrated in the community, he speaks at events and shares his knowledge gained from real world experience through his blog. Paul maintains the view that his job is also his hobby and doesn't ever want to take his fingers off the developers keyboard while maintaining a growth mindset.
 
 ## Speaker Contact Details
 
-![Contact QR Code](https://raw.githubusercontent.com/mrpaulandrew/Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery/main/Images/Contact.png)
+![Contact QR Code](./Images/Contact.png)
 
 [mrpaulandrew.com/contact](https://mrpaulandrew.com/contact/)
 ___
