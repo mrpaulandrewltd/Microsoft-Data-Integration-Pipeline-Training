@@ -5,20 +5,20 @@
 
 Hey friends and welcome to my training workshops on __Azure Data Integration Pipelines__. 
 
-Over the coming hours or days (depending on your choosen workshop) we will be all becoming pipeline workers!... And I completely recommend this description when describing your job to non-technical family members. But be warned, if you go on to tell them that the factory of pipes is in the cloud for orchestration and integration you are likely to be branded as crazy. However, here and now that is ok. You are amongst like-minded geeky friends that all want to become cloud pipeline workers that doing data plumbing with data pipes as well :-)
+Over the coming hours or days (depending on your chosen workshop) we will be all becoming pipeline workers!... And I completely recommend this description when describing your job to non-technical family members. But be warned, if you go on to tell them that the factory of pipes is in the cloud for orchestration and integration you are likely to be branded as crazy. However, here and now that is ok. You are amongst like-minded geeky friends that all want to become cloud pipeline workers that doing data plumbing with data pipes as well :-)
 
-On a more serious note, throughout our day of training you will quickly notice, like with most technologies, there are an awful lot of different ways you can implement Azure orchestration services and understanding the best way to do something is often the biggest challenge. That said, if you only take away one thing from this training, I will ask that you have an appreciation of this fact; in depends! Then when delviering solutions you take a step back from the requirements and think about the overall technical design and how Azure Integration Pipelines should fit into your platform as a core component.
+On a more serious note, throughout our day of training you will quickly notice, like with most technologies, there are an awful lot of different ways you can implement Azure orchestration services and understanding the best way to do something is often the biggest challenge. That said, if you only take away one thing from this training, I will ask that you have an appreciation of this fact; in depends! Then when delivering solutions you take a step back from the requirements and think about the overall technical design and how Azure Integration Pipelines should fit into your platform as a core component.
 
 All too often with new and shiny services we start playing around then try to make the technology fit our solution. Rather than thinking about the solution requirements and which technology meets our needs. This is true of all developers, I don't want to preach, so am simply asking that we take a growth mindset. Think about the outputs and the requirements as a goal.
 ___
 
 ## Workshops 
 
- - A Day of Fundementals - 1 Day
- - Fundamentals to Level 300 - 1 Day
- - Advanced Design & Delivery - 1 Day
- - [Advanced Design & Delivery (A Deep Dive) - 2 Day](./Content/Advanced%20Design%20%26%20Delivery%20(A%20Deep%20Dive)%20-%202%20Day/Agenda.md)
- - Zero to Level 401 - 3 Day
+ 1. [A Day of Fundamentals - 1 Day](./Content/01.%20A%20Day%20of%20Fundamentals%20-%201%20Day/01.%20Agenda.md)
+ 2. [Fundamentals to Level 300 - 1 Day](./Content/02.%20Fundamentals%20to%20Level%20300%20-%201%20Day/02.%20Agenda.md)
+ 3. [Advanced Design & Delivery - 1 Day](./Content/03.%20Advanced%20Design%20%26%20Delivery%20-%201%20Day/03.%20Agenda.md)
+ 4. [Advanced Design & Delivery (A Deep Dive) - 2 Day](./Content/04.%20Advanced%20Design%20%26%20Delivery%20(A%20Deep%20Dive)%20-%202%20Day/04.%20Agenda.md)
+ 5. [Zero to Level 401 - 3 Day](./Content/05.%20Zero%20to%20Level%20401%20-%203%20Day/05.%20Agenda.md)
 ___
 
 ## Speaker Biography
