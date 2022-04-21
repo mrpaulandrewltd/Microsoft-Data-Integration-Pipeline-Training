@@ -17,7 +17,7 @@ ___
  - A Day of Fundementals - 1 Day
  - Fundamentals to Level 300 - 1 Day
  - Advanced Design & Delivery - 1 Day
- - Advanced Design & Delivery (A Deep Dive) - 2 Day
+ - [Advanced Design & Delivery (A Deep Dive) - 2 Day](./Content/Advanced%20Design%20%26%20Delivery%20(A%20Deep%20Dive)%20-%202%20Day/Agenda.md)
  - Zero to Level 401 - 3 Day
 ___
 
