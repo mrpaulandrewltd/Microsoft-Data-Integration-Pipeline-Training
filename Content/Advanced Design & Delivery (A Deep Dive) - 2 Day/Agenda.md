@@ -1,7 +1,7 @@
 # Azure Data Integration Pipeline Training
 ## Advanced Design & Delivery (A Deep Dive)
 
-![Slide Header](.\Agenda%20Header.png)
+![Slide Header](./Agenda%20Header.png)
 
 ___
 
@@ -18,6 +18,8 @@ ___
 ## Agenda
 
 The following offers an insight into the complete agenda and module breakdown for this course.
+
+### Day 1
 
 * __Module 1:__ [Pipeline Fundamentals]()
   * The History of Azure Orchestration
@@ -71,6 +73,8 @@ ___
   * Orchestration Framework - [procfwk.com](http://procfwk.com/)
 
 ___
+
+### Day 2
 
 * __An Architects Recap__: [Modules 1 to 6]()
   * Design
