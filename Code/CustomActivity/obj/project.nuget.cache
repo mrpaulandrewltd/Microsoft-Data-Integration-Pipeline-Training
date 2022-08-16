@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xRYOk9IhudNquJUU9b9JCl1B1oiWukwfQcF3G+uz+Yc2wIvOQgSgEa86Jepb1nvUAUel2waPl+qrCo11gOh5Lg==",
+  "dgSpecHash": "f0p4CwgurPXk2v0yD5sG6nLAvje2rr5wHxFdncruLvsOGiK3Q2I9TnSpBC64Z+fnkevGX0xQTI2XPAbWzSUW3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\paul.andrew\\GitHub\\Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery\\Code\\CustomActivity\\CustomActivity.csproj",
+  "projectFilePath": "C:\\Users\\paul.andrew\\GitHub\\Azure-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
