@@ -9,7 +9,7 @@ Over the coming hours or days (depending on your chosen workshop) we will be all
 
 On a more serious note, throughout our day of training you will quickly notice, like with most technologies, there are an awful lot of different ways you can implement Azure orchestration services and understanding the best way to do something is often the biggest challenge. That said, if you only take away one thing from this training, I will ask that you have an appreciation of this fact; in depends! Then when delivering solutions you take a step back from the requirements and think about the overall technical design and how Azure Integration Pipelines should fit into your platform as a core component.
 
-All too often with new and shiny services we start playing around then try to make the technology fit our solution. Rather than thinking about the solution requirements and which technology meets our needs. This is true of all developers, I don't want to preach, so am simply asking that we take a growth mindset. Think about the outputs and the requirements as a goal.
+All too often with new and sh iny services we start playing around then try to make the technology fit our solution. Rather than thinking about the solution requirements and which technology meets our needs. This is true of all developers, I don't want to preach, so am simply asking that we take a growth mindset. Think about the outputs and the requirements as a goal.
 ___
 
 ## Workshops 
@@ -19,6 +19,29 @@ ___
  3. [Advanced Design & Delivery - 1 Day](./Content/03.%20Advanced%20Design%20%26%20Delivery%20-%201%20Day/03.%20Agenda.md)
  4. [Advanced Design & Delivery (A Deep Dive) - 2 Day](./Content/04.%20Advanced%20Design%20%26%20Delivery%20(A%20Deep%20Dive)%20-%202%20Day/04.%20Agenda.md)
  5. [Zero to Level 401 - 3 Day](./Content/05.%20Zero%20to%20Level%20401%20-%203%20Day/05.%20Agenda.md)
+___
+
+## Prerequisites
+
+If participating in any of these training workshop there will be labs to work through and demo code to optionally participate in. These labs will focus on the development of Azure data platform resources, it is therefore recommended that you bring the following ready to use. There will be little spare time for initial setup work.
+
+* Most importantly, access to a Microsoft Azure Tenant including a usable Azure Subscription.
+  * A free trial account is sufficient, but please have this setup prior to the event to avoid delays.
+  * This should include the ability to provision resources in an Azure Resource Group with owner level access.
+* A developer laptop with power and some form of WiFi connectivity (sorry if obvious).
+* Suggested software to be installed on your laptop to make the learning experience run smoothly:
+  * A modern web browser, Microsoft Edge or similar as preferred.
+  * A suitable IDE, VSCode or Visual Studio including Azure development extensions.
+  * Database tools, SQL Server Management Studio or Azure Data Studio.
+  * GitHub desktop or similar for repository interaction.
+  * Azure Storage Explorer.
+  * A PDF file viewer.
+* Play the Azure Icon Game, it will help. See blog post for context: [https://mrpaulandrew.com/2017/12/15/the-azure-icon-game](https://mrpaulandrew.com/2017/12/15/the-azure-icon-game)
+
+For software downloads, please complete these tasks prior to the event to avoid internet bandwidth contention for other attendees.
+
+_Many thanks_
+
 ___
 
 ## Speaker Biography
