@@ -1,0 +1,30 @@
+{
+	"name": "ADLS_BIN_AdventureWorks",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_saintegrationpipelines",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Entity": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Labs"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@{dataset().Entity}.tsv",
+					"type": "Expression"
+				},
+				"folderPath": "Raw",
+				"fileSystem": "lakeroot"
+			}
+		}
+	}
+}

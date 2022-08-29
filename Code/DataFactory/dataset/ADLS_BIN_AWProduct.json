@@ -1,0 +1,22 @@
+{
+	"name": "ADLS_BIN_AWProduct",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_saintegrationpipelines",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Labs"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Product.csv",
+				"folderPath": "Raw",
+				"fileSystem": "lakeroot"
+			}
+		}
+	}
+}

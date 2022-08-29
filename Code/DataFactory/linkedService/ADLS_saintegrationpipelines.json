@@ -1,0 +1,10 @@
+{
+	"name": "ADLS_saintegrationpipelines",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://saintegrationpipelines.dfs.core.windows.net/"
+		}
+	}
+}
