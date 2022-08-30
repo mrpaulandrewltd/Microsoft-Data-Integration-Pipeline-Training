@@ -1,0 +1,8 @@
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\bin\Debug\trainingdb01.dacpac
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\trainingdb01.sqlproj.AssemblyReference.cache
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\Model.xml
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\refactor.xml
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\postdeploy.sql
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\predeploy.sql
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\trainingdb01.dll
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\MetadataDB\obj\Debug\trainingdb01.pdb

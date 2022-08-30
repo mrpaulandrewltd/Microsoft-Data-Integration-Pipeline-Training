@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace CustomActivity
 {
@@ -7,6 +8,8 @@ namespace CustomActivity
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Thread.Sleep(120000); // sleep 3mins
+            Console.WriteLine("Done");
         }
     }
 }

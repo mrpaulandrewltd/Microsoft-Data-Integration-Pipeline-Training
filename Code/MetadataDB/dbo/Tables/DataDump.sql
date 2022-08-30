@@ -1,4 +1,5 @@
-﻿CREATE TABLE [dbo].[DataDump] (
-    [SomeValue] NVARCHAR (50) NOT NULL
+﻿CREATE TABLE [dbo].[DataDump](
+	[SomeValue] [nvarchar](50) NOT NULL,
+	[DateTimeAdded] [datetime] NOT NULL DEFAULT (getdate())
 );
 

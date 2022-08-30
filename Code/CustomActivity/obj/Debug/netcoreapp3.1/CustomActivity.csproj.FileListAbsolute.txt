@@ -12,3 +12,16 @@ C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipelines-Advanced-Design-and
 C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery\Code\CustomActivity\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.dll
 C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery\Code\CustomActivity\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.pdb
 C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipelines-Advanced-Design-and-Delivery\Code\CustomActivity\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.genruntimeconfig.cache
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\bin\Debug\netcoreapp3.1\CustomActivity.exe
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\bin\Debug\netcoreapp3.1\CustomActivity.deps.json
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\bin\Debug\netcoreapp3.1\CustomActivity.runtimeconfig.json
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\bin\Debug\netcoreapp3.1\CustomActivity.runtimeconfig.dev.json
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\bin\Debug\netcoreapp3.1\CustomActivity.dll
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\bin\Debug\netcoreapp3.1\CustomActivity.pdb
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.AssemblyInfoInputs.cache
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.AssemblyInfo.cs
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.csproj.CoreCompileInputs.cache
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.dll
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.pdb
+C:\Users\paul.andrew\GitHub\Azure-Data-Integration-Pipeline-Training\Code\CustomActivity\obj\Debug\netcoreapp3.1\CustomActivity.genruntimeconfig.cache

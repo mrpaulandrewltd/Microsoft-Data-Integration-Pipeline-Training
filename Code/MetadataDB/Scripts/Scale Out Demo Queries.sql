@@ -22,7 +22,14 @@ EXEC [dbo].[SetBucketProcesses] @DebugMode = 1;
 TRUNCATE TABLE [dbo].[DataDump];
 
 SELECT COUNT(0) FROM [dbo].[DataDump];
-SELECT [SomeValue] FROM [dbo].[DataDump];
+SELECT * FROM [dbo].[DataDump];
+
+SELECT 
+	MIN([DateTimeAdded]) AS 'Min',
+	MAX([DateTimeAdded]) AS 'Min',
+	DATEDIFF(second,MIN([DateTimeAdded]),MAX([DateTimeAdded])) AS 'Diff (Seconds)'
+FROM
+	[dbo].[DataDump];
 
 
 --after demo
