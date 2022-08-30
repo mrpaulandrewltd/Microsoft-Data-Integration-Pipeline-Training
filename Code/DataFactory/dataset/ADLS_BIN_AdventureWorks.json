@@ -1,36 +1,30 @@
 {
-	"name": "ADLS_Raw_Generic",
+	"name": "ADLS_BIN_AdventureWorks",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage1",
+			"referenceName": "ADLS_saintegrationpipelines",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"File": {
+			"Entity": {
 				"type": "string"
 			}
 		},
 		"folder": {
-			"name": "Lab5"
+			"name": "Labs"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Binary",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().File",
+					"value": "@{dataset().Entity}.tsv",
 					"type": "Expression"
 				},
 				"folderPath": "Raw",
 				"fileSystem": "lakeroot"
-			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
-		},
-		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+			}
+		}
+	}
 }

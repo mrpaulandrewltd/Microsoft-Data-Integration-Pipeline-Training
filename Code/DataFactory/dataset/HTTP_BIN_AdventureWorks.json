@@ -1,0 +1,28 @@
+{
+	"name": "HTTP_BIN_AdventureWorks",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HTTP_AWGitHub",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Entity": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Labs"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@{dataset().Entity}.csv",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}
