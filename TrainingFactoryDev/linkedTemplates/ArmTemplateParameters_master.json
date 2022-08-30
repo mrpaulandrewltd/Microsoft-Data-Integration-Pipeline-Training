@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "TrainingFactoryDev"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
 		"TrainingStore01_connectionString": {
 			"value": ""
 		},
@@ -14,11 +17,17 @@
 		"traininglake01noneKV_accountKey": {
 			"value": ""
 		},
+		"ADLS_saintegrationpipelines_properties_typeProperties_url": {
+			"value": "https://traininglake01.dfs.core.windows.net"
+		},
 		"AnyDatabaseConnection_properties_typeProperties_connectionString_secretName": {
 			"value": "@linkedService().DBConnectionSecret"
 		},
 		"AnyDatabaseConnectionFromAnyKeyVault_properties_typeProperties_connectionString_secretName": {
 			"value": "@linkedService().KeyVaultSecretName"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adayfullofadfsa.dfs.core.windows.net"
 		},
 		"BatchForTraining01_properties_typeProperties_batchUri": {
 			"value": "https://batchfortraining01.uksouth.batch.azure.com"
@@ -31,6 +40,12 @@
 		},
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"value": "@{linkedService().baseUrl}"
+		},
+		"HTTP_AWGitHub_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/"
+		},
+		"HTTP_AWProduct_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/Product.csv"
 		},
 		"LaptopFiles_properties_typeProperties_host": {
 			"value": "C:\\ADFRoot\\"
@@ -58,6 +73,15 @@
 		},
 		"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
+		},
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "adayfullofadf-sql.database.windows.net"
+		},
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "sql-admin"
+		},
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
 		},
 		"AzureKeyVault1_properties_privateLinkResourceId": {
 			"value": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/Training/providers/Microsoft.KeyVault/vaults/TrainingKeys01"

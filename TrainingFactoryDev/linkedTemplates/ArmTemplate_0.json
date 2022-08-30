@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "TrainingFactoryDev"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"TrainingStore01_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrainingStore01'"
@@ -19,9 +23,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'traininglake01noneKV'"
 		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adayfullofadfsa.dfs.core.windows.net"
+		},
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "@{linkedService().baseUrl}"
+		},
+		"HTTP_AWGitHub_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/"
+		},
+		"HTTP_AWProduct_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/Product.csv"
 		},
 		"TrainingKeys01_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -39,41 +55,16 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
 		},
-		"AnyDatabaseConnection_properties_typeProperties_connectionString_secretName": {
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
-			"defaultValue": "@linkedService().DBConnectionSecret"
+			"defaultValue": "adayfullofadf-sql.database.windows.net"
 		},
-		"AnyDatabaseConnectionFromAnyKeyVault_properties_typeProperties_connectionString_secretName": {
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
 			"type": "string",
-			"defaultValue": "@linkedService().KeyVaultSecretName"
+			"defaultValue": "sql-admin"
 		},
-		"BatchForTraining01_properties_typeProperties_batchUri": {
-			"type": "string",
-			"defaultValue": "https://batchfortraining01.uksouth.batch.azure.com"
-		},
-		"BatchForTraining01_properties_typeProperties_poolName": {
-			"type": "string",
-			"defaultValue": "09a2ec47-0cc8-4492-935c-04852e3ec654"
-		},
-		"BatchForTraining01_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "batchfortraining01"
-		},
-		"LaptopFiles_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "C:\\ADFRoot\\"
-		},
-		"LaptopFiles_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "ADFIRUser"
-		},
-		"TrainingKeys01withUMI_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://TrainingKeys01.vault.azure.net/"
-		},
-		"trainingdb01_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "ConnectionString-trainingdb01"
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
 		}
 	},
 	"variables": {
@@ -493,6 +484,32 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GenericKeys')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -507,6 +524,36 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('GenericKeys_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HTTP_AWGitHub')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HTTP_AWGitHub_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HTTP_AWProduct')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HTTP_AWProduct_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -606,6 +653,36 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SSISIntegrationRuntime')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "UK South",
+						"nodeSize": "Standard_D2_v3",
+						"numberOfNodes": 1,
+						"maxParallelExecutionsPerNode": 2
+					},
+					"ssisProperties": {
+						"catalogInfo": {
+							"catalogServerEndpoint": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]",
+							"catalogAdminUserName": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]",
+							"catalogAdminPassword": {
+								"type": "SecureString",
+								"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
+							},
+							"catalogPricingTier": "S1"
+						},
+						"edition": "Standard",
+						"licenseType": "LicenseIncluded"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TrainingCredential01')]",
 			"type": "Microsoft.DataFactory/factories/credentials",
 			"apiVersion": "2018-06-01",
@@ -625,28 +702,61 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/HTTP_BIN_AWProduct')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
+				"linkedServiceName": {
+					"referenceName": "HTTP_AWProduct",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Labs"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HTTP_AWProduct')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HTTP_BIN_AdventureWorks')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HTTP_AWGitHub",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Entity": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Labs"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@{dataset().Entity}.csv",
+							"type": "Expression"
 						}
 					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
+				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HTTP_AWGitHub')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LakeFileOrderDetailLinesParquet')]",
@@ -844,166 +954,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/traininglake01noneKV')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AnyDatabaseConnection')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"DBConnectionSecret": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "TrainingKeys01",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": {
-							"value": "[parameters('AnyDatabaseConnection_properties_typeProperties_connectionString_secretName')]",
-							"type": "Expression"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AnyDatabaseConnectionFromAnyKeyVault')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"KeyVaultURL": {
-						"type": "string"
-					},
-					"KeyVaultSecretName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "GenericKeys",
-							"type": "LinkedServiceReference",
-							"parameters": {
-								"baseUrl": {
-									"value": "@linkedService().KeyVaultURL",
-									"type": "Expression"
-								}
-							}
-						},
-						"secretName": {
-							"value": "[parameters('AnyDatabaseConnectionFromAnyKeyVault_properties_typeProperties_connectionString_secretName')]",
-							"type": "Expression"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/GenericKeys')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/BatchForTraining01')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBatch",
-				"typeProperties": {
-					"batchUri": "[parameters('BatchForTraining01_properties_typeProperties_batchUri')]",
-					"poolName": "[parameters('BatchForTraining01_properties_typeProperties_poolName')]",
-					"accountName": "[parameters('BatchForTraining01_properties_typeProperties_accountName')]",
-					"linkedServiceName": {
-						"referenceName": "TrainingStore01",
-						"type": "LinkedServiceReference"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/TrainingStore01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LaptopFiles')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('LaptopFiles_properties_typeProperties_host')]",
-					"userId": "[parameters('LaptopFiles_properties_typeProperties_userId')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "TrainingKeys01",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "ADFIRUser"
-					}
-				},
-				"connectVia": {
-					"referenceName": "PaulsLaptopIR",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/PaulsLaptopIR')]",
-				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TrainingKeys01withUMI')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('TrainingKeys01withUMI_properties_typeProperties_baseUrl')]",
-					"credential": {
-						"referenceName": "TrainingCredential01",
-						"type": "CredentialReference"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/credentials/TrainingCredential01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trainingdb01')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "TrainingKeys01",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('trainingdb01_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
 			]
 		}
 	]

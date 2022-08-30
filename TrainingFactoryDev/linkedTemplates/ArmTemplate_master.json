@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "TrainingFactoryDev"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"TrainingStore01_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrainingStore01'"
@@ -19,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'traininglake01noneKV'"
 		},
+		"ADLS_saintegrationpipelines_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://traininglake01.dfs.core.windows.net"
+		},
 		"AnyDatabaseConnection_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "@linkedService().DBConnectionSecret"
@@ -26,6 +34,10 @@
 		"AnyDatabaseConnectionFromAnyKeyVault_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "@linkedService().KeyVaultSecretName"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adayfullofadfsa.dfs.core.windows.net"
 		},
 		"BatchForTraining01_properties_typeProperties_batchUri": {
 			"type": "string",
@@ -42,6 +54,14 @@
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "@{linkedService().baseUrl}"
+		},
+		"HTTP_AWGitHub_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/"
+		},
+		"HTTP_AWProduct_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/Product.csv"
 		},
 		"LaptopFiles_properties_typeProperties_host": {
 			"type": "string",
@@ -78,6 +98,17 @@
 		"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
+		},
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "adayfullofadf-sql.database.windows.net"
+		},
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"type": "string",
+			"defaultValue": "sql-admin"
+		},
+		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
 		},
 		"AzureKeyVault1_properties_privateLinkResourceId": {
 			"type": "string",
@@ -120,6 +151,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
 					"TrainingStore01_connectionString": {
 						"value": "[parameters('TrainingStore01_connectionString')]"
 					},
@@ -129,8 +163,17 @@
 					"traininglake01noneKV_accountKey": {
 						"value": "[parameters('traininglake01noneKV_accountKey')]"
 					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
 					"GenericKeys_properties_typeProperties_baseUrl": {
 						"value": "[parameters('GenericKeys_properties_typeProperties_baseUrl')]"
+					},
+					"HTTP_AWGitHub_properties_typeProperties_url": {
+						"value": "[parameters('HTTP_AWGitHub_properties_typeProperties_url')]"
+					},
+					"HTTP_AWProduct_properties_typeProperties_url": {
+						"value": "[parameters('HTTP_AWProduct_properties_typeProperties_url')]"
 					},
 					"TrainingKeys01_properties_typeProperties_baseUrl": {
 						"value": "[parameters('TrainingKeys01_properties_typeProperties_baseUrl')]"
@@ -143,6 +186,36 @@
 					},
 					"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+						"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
+					},
+					"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+						"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "TrainingFactoryDev_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADLS_saintegrationpipelines_properties_typeProperties_url": {
+						"value": "[parameters('ADLS_saintegrationpipelines_properties_typeProperties_url')]"
 					},
 					"AnyDatabaseConnection_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('AnyDatabaseConnection_properties_typeProperties_connectionString_secretName')]"
@@ -170,24 +243,6 @@
 					},
 					"trainingdb01_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('trainingdb01_properties_typeProperties_connectionString_secretName')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "TrainingFactoryDev_ArmTemplate_1",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					},
 					"traininglake01_properties_typeProperties_url": {
 						"value": "[parameters('traininglake01_properties_typeProperties_url')]"
@@ -225,6 +280,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'TrainingFactoryDev_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "TrainingFactoryDev_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'TrainingFactoryDev_ArmTemplate_2')]"
 			]
 		}
 	]
