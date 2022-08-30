@@ -4,7 +4,15 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://saintegrationpipelines.dfs.core.windows.net/"
+			"url": "https://traininglake01.dfs.core.windows.net",
+			"accountKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "TrainingKeys01",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "traininglake01"
+			}
 		}
 	}
 }
