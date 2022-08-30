@@ -39,7 +39,7 @@
 				}
 			},
 			{
-				"name": "Set Global Param",
+				"name": "Set Var From Global Param",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
