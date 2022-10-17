@@ -18,10 +18,8 @@
 					"functionName": "SendEmail",
 					"method": "POST",
 					"body": {
-						"emailRecipients": "mrpaulandrew@ymail.com",
-						"emailSubject": "ADFprocfwk Alert: Deployment Gateway Test",
-						"emailBody": "Deployment Gateway Test Success",
-						"emailImportance": "High"
+						"value": "@concat('\n{\n\"emailRecipients\": \"mrpaulandrew@ymail.com\",\n\"emailSubject\": \"ADFprocfwk Alert: Deployment Gateway Test\",\n\"emailBody\": \"Deployment Gateway Test Success\",\n\"emailImportance\": \"High\"\n}')",
+						"type": "Expression"
 					}
 				},
 				"linkedServiceName": {
@@ -30,6 +28,21 @@
 				}
 			}
 		],
+		"parameters": {
+			"Recipients": {
+				"type": "string"
+			},
+			"Subject": {
+				"type": "string"
+			},
+			"Body": {
+				"type": "string"
+			},
+			"Importance": {
+				"type": "string",
+				"defaultValue": "High"
+			}
+		},
 		"folder": {
 			"name": "Demo Pipelines/Misc"
 		},
