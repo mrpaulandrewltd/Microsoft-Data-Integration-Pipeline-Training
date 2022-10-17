@@ -1,0 +1,38 @@
+{
+	"name": "EmailSender",
+	"properties": {
+		"activities": [
+			{
+				"name": "Send Email",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SendEmail",
+					"method": "POST",
+					"body": {
+						"emailRecipients": "mrpaulandrew@ymail.com",
+						"emailSubject": "ADFprocfwk Alert: Deployment Gateway Test",
+						"emailBody": "Deployment Gateway Test Success",
+						"emailImportance": "High"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "EmailSenderFunction",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Demo Pipelines/Misc"
+		},
+		"annotations": []
+	}
+}
