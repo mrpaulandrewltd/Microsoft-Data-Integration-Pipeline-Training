@@ -136,7 +136,7 @@
         },
         {
           "source": {
-            "type": "DateTime",
+            "type": "Decimal",
             "ordinal": 14
           },
           "sink": {
