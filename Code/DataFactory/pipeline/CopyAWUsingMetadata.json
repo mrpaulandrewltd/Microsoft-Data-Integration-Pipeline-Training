@@ -156,12 +156,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"EntityName": {
-				"type": "string",
-				"defaultValue": "ProductCategory"
-			}
-		},
 		"variables": {
 			"Catalog": {
 				"type": "Array",
