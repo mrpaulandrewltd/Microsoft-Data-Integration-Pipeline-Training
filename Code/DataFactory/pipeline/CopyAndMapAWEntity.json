@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
+				"name": "Get catalog",
+				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,107 +15,128 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+					"url": {
+						"value": "https://raw.githubusercontent.com/richardswinbank/adf-metadata/main/catalog.json",
+						"type": "Expression"
 					},
-					"sink": {
-						"type": "ParquetSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "ParquetWriteSettings"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"type": "Int32",
-									"ordinal": 1
-								},
-								"sink": {
-									"name": "ProductCategoryID",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 2
-								},
-								"sink": {
-									"name": "Name",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "Guid",
-									"ordinal": 3
-								},
-								"sink": {
-									"name": "rowguid",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "DateTime",
-									"ordinal": 4
-								},
-								"sink": {
-									"name": "ModifiedDate",
-									"physicalType": "UTF8"
-								}
-							}
-						],
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
+					"method": "GET"
+				}
+			},
+			{
+				"name": "Cache catalog as JSON array",
+				"type": "SetVariable",
+				"dependsOn": [
 					{
-						"referenceName": "HTTP_TSV_AdventureWorks",
-						"type": "DatasetReference",
-						"parameters": {
-							"EntityName": {
-								"value": "@pipeline().parameters.EntityName",
-								"type": "Expression"
-							}
-						}
+						"activity": "Get catalog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
-				"outputs": [
-					{
-						"referenceName": "ADLS_PQT_AdventureWorks",
-						"type": "DatasetReference",
-						"parameters": {
-							"EntityName": {
-								"value": "@pipeline().parameters.EntityName",
-								"type": "Expression"
-							}
-						}
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Catalog",
+					"value": {
+						"value": "@json(activity('Get catalog').output.Response)",
+						"type": "Expression"
 					}
-				]
+				}
+			},
+			{
+				"name": "ForEach AW entity",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Cache catalog as JSON array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('Catalog')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy AW entity",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"value": "@item().translator",
+									"type": "Expression"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "HTTP_TSV_AdventureWorks",
+									"type": "DatasetReference",
+									"parameters": {
+										"EntityName": {
+											"value": "@item().EntityName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_PQT_AdventureWorks",
+									"type": "DatasetReference",
+									"parameters": {
+										"EntityName": {
+											"value": "@item().EntityName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
 			"EntityName": {
 				"type": "string",
 				"defaultValue": "ProductCategory"
+			}
+		},
+		"variables": {
+			"Catalog": {
+				"type": "Array",
+				"defaultValue": []
 			}
 		},
 		"folder": {
