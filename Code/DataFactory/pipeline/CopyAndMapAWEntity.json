@@ -15,10 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": {
-						"value": "https://raw.githubusercontent.com/richardswinbank/adf-metadata/main/catalog.json",
-						"type": "Expression"
-					},
+					"url": "https://raw.githubusercontent.com/mrpaulandrewltd/Azure-Data-Integration-Pipeline-Training/main/Labs/TableCatalog.json",
 					"method": "GET"
 				}
 			},
