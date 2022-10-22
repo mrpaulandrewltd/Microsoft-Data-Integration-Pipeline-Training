@@ -44,19 +44,17 @@
 									"ordinal": 1
 								},
 								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
+									"name": "ProductCategoryID",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"type": "String",
+									"type": "DateTime",
 									"ordinal": 2
 								},
 								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
+									"name": "Name",
 									"physicalType": "UTF8"
 								}
 							},
@@ -66,8 +64,7 @@
 									"ordinal": 3
 								},
 								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
+									"name": "rowguid",
 									"physicalType": "UTF8"
 								}
 							},
@@ -77,8 +74,7 @@
 									"ordinal": 4
 								},
 								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
+									"name": "ModifiedDate",
 									"physicalType": "UTF8"
 								}
 							}
