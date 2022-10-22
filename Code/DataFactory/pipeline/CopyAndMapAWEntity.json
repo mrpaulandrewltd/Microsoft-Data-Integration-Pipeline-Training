@@ -51,7 +51,7 @@
 							},
 							{
 								"source": {
-									"type": "DateTime",
+									"type": "String",
 									"ordinal": 2
 								},
 								"sink": {
