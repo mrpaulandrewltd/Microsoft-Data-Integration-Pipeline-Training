@@ -146,7 +146,7 @@
 								"functionName": "SendEmail",
 								"method": "POST",
 								"body": {
-									"value": "{\n    \"emailRecipients\": \"richard.swinbank@gmail.com\",\n    \"emailSubject\": \"Error copying @{item().EntityName}\",\n    \"emailBody\": @{trim('abc')},\n    \"emailImportance\": \"High\"\n}",
+									"value": "{\n    \"emailRecipients\": \"richard.swinbank@gmail.com\",\n    \"emailSubject\": \"Error copying @{item().EntityName}\",\n    \"emailBody\": \"@{replace(activity('Copy AW entity').output.errors[0].Message,'\"','\\\"')}\"\n}",
 									"type": "Expression"
 								}
 							},
