@@ -10,7 +10,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductID ",
+            "name": "ProductID",
             "physicalType": "UTF8"
           }
         },
@@ -20,7 +20,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "Name ",
+            "name": "Name",
             "physicalType": "UTF8"
           }
         },
@@ -30,7 +30,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "ProductNumber ",
+            "name": "ProductNumber",
             "physicalType": "UTF8"
           }
         },
@@ -40,7 +40,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "MakeFlag ",
+            "name": "MakeFlag",
             "physicalType": "UTF8"
           }
         },
@@ -50,7 +50,7 @@
             "ordinal": 5
           },
           "sink": {
-            "name": "FinishedGoodsFlag ",
+            "name": "FinishedGoodsFlag",
             "physicalType": "UTF8"
           }
         },
@@ -60,7 +60,7 @@
             "ordinal": 6
           },
           "sink": {
-            "name": "Color ",
+            "name": "Color",
             "physicalType": "UTF8"
           }
         },
@@ -70,7 +70,7 @@
             "ordinal": 7
           },
           "sink": {
-            "name": "SafetyStockLevel ",
+            "name": "SafetyStockLevel",
             "physicalType": "UTF8"
           }
         },
@@ -80,7 +80,7 @@
             "ordinal": 8
           },
           "sink": {
-            "name": "ReorderPoint ",
+            "name": "ReorderPoint",
             "physicalType": "UTF8"
           }
         },
@@ -90,7 +90,7 @@
             "ordinal": 9
           },
           "sink": {
-            "name": "StandardCost ",
+            "name": "StandardCost",
             "physicalType": "UTF8"
           }
         },
@@ -100,7 +100,7 @@
             "ordinal": 10
           },
           "sink": {
-            "name": "ListPrice ",
+            "name": "ListPrice",
             "physicalType": "UTF8"
           }
         },
@@ -110,7 +110,7 @@
             "ordinal": 11
           },
           "sink": {
-            "name": "Size ",
+            "name": "Size",
             "physicalType": "UTF8"
           }
         },
@@ -120,7 +120,7 @@
             "ordinal": 12
           },
           "sink": {
-            "name": "SizeUnitMeasureCode ",
+            "name": "SizeUnitMeasureCode",
             "physicalType": "UTF8"
           }
         },
@@ -130,7 +130,7 @@
             "ordinal": 13
           },
           "sink": {
-            "name": "WeightUnitMeasureCode ",
+            "name": "WeightUnitMeasureCode",
             "physicalType": "UTF8"
           }
         },
@@ -140,7 +140,7 @@
             "ordinal": 14
           },
           "sink": {
-            "name": "Weight ",
+            "name": "Weight",
             "physicalType": "UTF8"
           }
         },
@@ -150,7 +150,7 @@
             "ordinal": 15
           },
           "sink": {
-            "name": "DaysToManufacture ",
+            "name": "DaysToManufacture",
             "physicalType": "UTF8"
           }
         },
@@ -160,7 +160,7 @@
             "ordinal": 16
           },
           "sink": {
-            "name": "ProductLine ",
+            "name": "ProductLine",
             "physicalType": "UTF8"
           }
         },
@@ -170,7 +170,7 @@
             "ordinal": 17
           },
           "sink": {
-            "name": "Class ",
+            "name": "Class",
             "physicalType": "UTF8"
           }
         },
@@ -180,7 +180,7 @@
             "ordinal": 18
           },
           "sink": {
-            "name": "Style ",
+            "name": "Style",
             "physicalType": "UTF8"
           }
         },
@@ -190,7 +190,7 @@
             "ordinal": 19
           },
           "sink": {
-            "name": "ProductSubcategoryID ",
+            "name": "ProductSubcategoryID",
             "physicalType": "UTF8"
           }
         },
@@ -200,7 +200,7 @@
             "ordinal": 20
           },
           "sink": {
-            "name": "ProductModelID ",
+            "name": "ProductModelID",
             "physicalType": "UTF8"
           }
         },
@@ -210,7 +210,7 @@
             "ordinal": 21
           },
           "sink": {
-            "name": "SellStartDate ",
+            "name": "SellStartDate",
             "physicalType": "UTF8"
           }
         },
@@ -220,7 +220,7 @@
             "ordinal": 22
           },
           "sink": {
-            "name": "SellEndDate ",
+            "name": "SellEndDate",
             "physicalType": "UTF8"
           }
         },
@@ -230,7 +230,7 @@
             "ordinal": 23
           },
           "sink": {
-            "name": "DiscontinuedDate ",
+            "name": "DiscontinuedDate",
             "physicalType": "UTF8"
           }
         },
@@ -240,7 +240,7 @@
             "ordinal": 24
           },
           "sink": {
-            "name": "rowguid ",
+            "name": "rowguid",
             "physicalType": "UTF8"
           }
         },
@@ -250,7 +250,7 @@
             "ordinal": 25
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -326,7 +326,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductID ",
+            "name": "ProductID",
             "physicalType": "UTF8"
           }
         },
@@ -336,7 +336,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "StartDate ",
+            "name": "StartDate",
             "physicalType": "UTF8"
           }
         },
@@ -346,7 +346,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "EndDate ",
+            "name": "EndDate",
             "physicalType": "UTF8"
           }
         },
@@ -356,7 +356,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "StandardCost ",
+            "name": "StandardCost",
             "physicalType": "UTF8"
           }
         },
@@ -366,7 +366,7 @@
             "ordinal": 5
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -389,7 +389,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductDescriptionID ",
+            "name": "ProductDescriptionID",
             "physicalType": "UTF8"
           }
         },
@@ -399,7 +399,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "Description ",
+            "name": "Description",
             "physicalType": "UTF8"
           }
         },
@@ -409,7 +409,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "rowguid ",
+            "name": "rowguid",
             "physicalType": "UTF8"
           }
         },
@@ -419,7 +419,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -442,7 +442,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductID ",
+            "name": "ProductID",
             "physicalType": "UTF8"
           }
         },
@@ -452,7 +452,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "DocumentNode ",
+            "name": "DocumentNode",
             "physicalType": "UTF8"
           }
         },
@@ -462,7 +462,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -485,7 +485,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductID ",
+            "name": "ProductID",
             "physicalType": "UTF8"
           }
         },
@@ -495,7 +495,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "LocationID ",
+            "name": "LocationID",
             "physicalType": "UTF8"
           }
         },
@@ -505,7 +505,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "Shelf ",
+            "name": "Shelf",
             "physicalType": "UTF8"
           }
         },
@@ -515,7 +515,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "Bin ",
+            "name": "Bin",
             "physicalType": "UTF8"
           }
         },
@@ -525,7 +525,7 @@
             "ordinal": 5
           },
           "sink": {
-            "name": "Quantity ",
+            "name": "Quantity",
             "physicalType": "UTF8"
           }
         },
@@ -535,7 +535,7 @@
             "ordinal": 6
           },
           "sink": {
-            "name": "rowguid ",
+            "name": "rowguid",
             "physicalType": "UTF8"
           }
         },
@@ -545,7 +545,7 @@
             "ordinal": 7
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -568,7 +568,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductID ",
+            "name": "ProductID",
             "physicalType": "UTF8"
           }
         },
@@ -578,7 +578,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "StartDate ",
+            "name": "StartDate",
             "physicalType": "UTF8"
           }
         },
@@ -588,7 +588,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "EndDate ",
+            "name": "EndDate",
             "physicalType": "UTF8"
           }
         },
@@ -598,7 +598,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "ListPrice ",
+            "name": "ListPrice",
             "physicalType": "UTF8"
           }
         },
@@ -608,7 +608,7 @@
             "ordinal": 5
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -631,7 +631,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductReviewID ",
+            "name": "ProductReviewID",
             "physicalType": "UTF8"
           }
         },
@@ -641,7 +641,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "ProductID ",
+            "name": "ProductID",
             "physicalType": "UTF8"
           }
         },
@@ -651,7 +651,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "ReviewerName ",
+            "name": "ReviewerName",
             "physicalType": "UTF8"
           }
         },
@@ -661,7 +661,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "ReviewDate ",
+            "name": "ReviewDate",
             "physicalType": "UTF8"
           }
         },
@@ -671,7 +671,7 @@
             "ordinal": 5
           },
           "sink": {
-            "name": "EmailAddress ",
+            "name": "EmailAddress",
             "physicalType": "UTF8"
           }
         },
@@ -681,7 +681,7 @@
             "ordinal": 6
           },
           "sink": {
-            "name": "Rating ",
+            "name": "Rating",
             "physicalType": "UTF8"
           }
         },
@@ -691,7 +691,7 @@
             "ordinal": 7
           },
           "sink": {
-            "name": "Comments ",
+            "name": "Comments",
             "physicalType": "UTF8"
           }
         },
@@ -701,7 +701,7 @@
             "ordinal": 8
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
@@ -724,7 +724,7 @@
             "ordinal": 1
           },
           "sink": {
-            "name": "ProductSubcategoryID ",
+            "name": "ProductSubcategoryID",
             "physicalType": "UTF8"
           }
         },
@@ -734,7 +734,7 @@
             "ordinal": 2
           },
           "sink": {
-            "name": "ProductCategoryID ",
+            "name": "ProductCategoryID",
             "physicalType": "UTF8"
           }
         },
@@ -744,7 +744,7 @@
             "ordinal": 3
           },
           "sink": {
-            "name": "Name ",
+            "name": "Name",
             "physicalType": "UTF8"
           }
         },
@@ -754,7 +754,7 @@
             "ordinal": 4
           },
           "sink": {
-            "name": "rowguid ",
+            "name": "rowguid",
             "physicalType": "UTF8"
           }
         },
@@ -764,7 +764,7 @@
             "ordinal": 5
           },
           "sink": {
-            "name": "ModifiedDate ",
+            "name": "ModifiedDate",
             "physicalType": "UTF8"
           }
         }
