@@ -1,0 +1,32 @@
+{
+	"name": "ADLS_PQT_AdventureWorks",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_saintegrationpipelines",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"EntityName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Labs2"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().EntityName",
+					"type": "Expression"
+				},
+				"folderPath": "Raw",
+				"fileSystem": "lakeroot"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
