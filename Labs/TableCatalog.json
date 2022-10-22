@@ -36,7 +36,7 @@
         },
         {
           "source": {
-            "type": "Boolean",
+            "type": "String",
             "ordinal": 4
           },
           "sink": {
@@ -279,7 +279,7 @@
         },
         {
           "source": {
-            "type": "Int32",
+            "type": "String",
             "ordinal": 2
           },
           "sink": {
