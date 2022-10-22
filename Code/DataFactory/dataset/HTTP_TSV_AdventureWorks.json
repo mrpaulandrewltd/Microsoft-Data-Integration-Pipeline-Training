@@ -2,7 +2,7 @@
 	"name": "HTTP_TSV_AdventureWorks",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "HTTP_GitHubUserContent",
+			"referenceName": "HTTP_AWGitHub",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -19,7 +19,7 @@
 			"location": {
 				"type": "HttpServerLocation",
 				"relativeUrl": {
-					"value": "microsoft/sql-server-samples/master/samples/databases/adventure-works/oltp-install-script/@{dataset().EntityName}.csv",
+					"value": "@{dataset().EntityName}.csv",
 					"type": "Expression"
 				}
 			},
