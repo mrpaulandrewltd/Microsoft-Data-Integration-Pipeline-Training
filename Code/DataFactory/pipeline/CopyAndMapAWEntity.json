@@ -40,7 +40,7 @@
 						"mappings": [
 							{
 								"source": {
-									"type": "String",
+									"type": "Int32",
 									"ordinal": 1
 								},
 								"sink": {
@@ -51,7 +51,7 @@
 							},
 							{
 								"source": {
-									"type": "String",
+									"type": "DateTime",
 									"ordinal": 2
 								},
 								"sink": {
@@ -62,7 +62,7 @@
 							},
 							{
 								"source": {
-									"type": "String",
+									"type": "Guid",
 									"ordinal": 3
 								},
 								"sink": {
@@ -75,237 +75,6 @@
 								"source": {
 									"type": "String",
 									"ordinal": 4
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 5
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 6
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 7
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 8
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 9
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 10
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 11
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 12
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 13
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 14
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 15
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 16
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 17
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 18
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 19
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 20
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 21
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 22
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 23
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 24
-								},
-								"sink": {
-									"name": "Columnundefined",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"type": "String",
-									"ordinal": 25
 								},
 								"sink": {
 									"name": "Columnundefined",
