@@ -46,7 +46,7 @@
         },
         {
           "source": {
-            "type": "Boolean",
+            "type": "String",
             "ordinal": 5
           },
           "sink": {
