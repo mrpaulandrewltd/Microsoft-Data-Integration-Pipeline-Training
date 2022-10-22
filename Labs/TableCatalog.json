@@ -1,0 +1,779 @@
+[
+  {
+    "entityName": "Product",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "Name",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "ProductNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "MakeFlag",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "FinishedGoodsFlag",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 6
+          },
+          "sink": {
+            "name": "Color",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 7
+          },
+          "sink": {
+            "name": "SafetyStockLevel",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 8
+          },
+          "sink": {
+            "name": "ReorderPoint",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 9
+          },
+          "sink": {
+            "name": "StandardCost",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 10
+          },
+          "sink": {
+            "name": "ListPrice",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 11
+          },
+          "sink": {
+            "name": "Size",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 12
+          },
+          "sink": {
+            "name": "SizeUnitMeasureCode",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 13
+          },
+          "sink": {
+            "name": "WeightUnitMeasureCode",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 14
+          },
+          "sink": {
+            "name": "Weight",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 15
+          },
+          "sink": {
+            "name": "DaysToManufacture",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 16
+          },
+          "sink": {
+            "name": "ProductLine",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 17
+          },
+          "sink": {
+            "name": "Class",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 18
+          },
+          "sink": {
+            "name": "Style",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 19
+          },
+          "sink": {
+            "name": "ProductSubcategoryID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 20
+          },
+          "sink": {
+            "name": "ProductModelID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 21
+          },
+          "sink": {
+            "name": "SellStartDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 22
+          },
+          "sink": {
+            "name": "SellEndDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 23
+          },
+          "sink": {
+            "name": "DiscontinuedDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 24
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 25
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductCategory",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductCategoryID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "Name",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductCostHistory",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "StartDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "EndDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "StandardCost",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductDescription",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductDescriptionID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "Description",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductDocument",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "DocumentNode",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductInventory",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "LocationID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "Shelf",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "Bin",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "Quantity",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 6
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 7
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductListPriceHistory",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "StartDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "EndDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "ListPrice",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductReview",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductReviewID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "ReviewerName",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "ReviewDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "EmailAddress",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 6
+          },
+          "sink": {
+            "name": "Rating",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 7
+          },
+          "sink": {
+            "name": "Comments",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 8
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "ProductSubcategory",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductSubcategoryID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "ProductCategoryID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "Name",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  }
+]
