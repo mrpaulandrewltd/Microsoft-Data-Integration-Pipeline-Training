@@ -122,6 +122,38 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Notify error",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [
+								{
+									"activity": "Copy AW entity",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "SendEmail",
+								"method": "POST",
+								"body": {
+									"value": "{\n    \"emailRecipients\": \"richard.swinbank@gmail.com\",\n    \"emailSubject\": \"Error copying @{item().EntityName}\",\n    \"emailBody\": @{trim('abc')},\n    \"emailImportance\": \"High\"\n}",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "EmailSenderFunction",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}
