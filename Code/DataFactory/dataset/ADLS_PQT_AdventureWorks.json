@@ -19,7 +19,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().EntityName",
+					"value": "@{dataset().EntityName}.parquet",
 					"type": "Expression"
 				},
 				"folderPath": "Raw",
