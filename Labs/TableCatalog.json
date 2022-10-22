@@ -1,0 +1,55 @@
+[
+  {
+    "entityName": "ProductCategory",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "ProductCategoryID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "Name",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  }
+]
