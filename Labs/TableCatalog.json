@@ -682,5 +682,118 @@
         "treatBooleanAsNumber": false
       }
     }
+  },
+  {
+    "entityName": "SalesOrderDetail",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "SalesOrderID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "SalesOrderDetailID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "CarrierTrackingNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "OrderQty",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 6
+          },
+          "sink": {
+            "name": "SpecialOfferID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 7
+          },
+          "sink": {
+            "name": "UnitPrice",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 8
+          },
+          "sink": {
+            "name": "UnitPriceDiscount",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 9
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 10
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
   }
 ]
