@@ -770,8 +770,18 @@
         },
         {
           "source": {
-            "type": "Guid",
+            "type": "Decimal",
             "ordinal": 9
+          },
+          "sink": {
+            "name": "LineTotal",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 10
           },
           "sink": {
             "name": "rowguid",
@@ -781,7 +791,7 @@
         {
           "source": {
             "type": "DateTime",
-            "ordinal": 10
+            "ordinal": 11
           },
           "sink": {
             "name": "ModifiedDate",
