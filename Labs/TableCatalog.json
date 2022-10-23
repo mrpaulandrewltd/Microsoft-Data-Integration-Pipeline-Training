@@ -1043,7 +1043,7 @@
         },
         {
           "source": {
-            "type": "DateTime",
+            "type": "Guid",
             "ordinal": 24
           },
           "sink": {
