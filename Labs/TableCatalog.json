@@ -1054,7 +1054,7 @@
         {
           "source": {
             "type": "Guid",
-            "ordinal": 24
+            "ordinal": 25
           },
           "sink": {
             "name": "rowguid",
@@ -1064,7 +1064,7 @@
         {
           "source": {
             "type": "DateTime",
-            "ordinal": 25
+            "ordinal": 26
           },
           "sink": {
             "name": "ModifiedDate",
