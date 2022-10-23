@@ -1043,6 +1043,16 @@
         },
         {
           "source": {
+            "type": "String",
+            "ordinal": 24
+          },
+          "sink": {
+            "name": "Comment",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
             "type": "Guid",
             "ordinal": 24
           },
