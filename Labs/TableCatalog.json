@@ -531,11 +531,11 @@
         },
         {
           "source": {
-            "type": "Guid",
+            "type": "DateTime",
             "ordinal": 6
           },
           "sink": {
-            "name": "DateTime",
+            "name": "rowguid",
             "physicalType": "UTF8"
           }
         },
