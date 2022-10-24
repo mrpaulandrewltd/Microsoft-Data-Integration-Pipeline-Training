@@ -1,29 +1,27 @@
 {
-	"name": "ADLS_TSV_AdventureWorks",
+	"name": "HTTP_TSV_AdventureWorks",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ADLS_saintegrationpipelines",
+			"referenceName": "HTTP_AWGitHub",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"FileName": {
+			"EntityName": {
 				"type": "string"
 			}
 		},
 		"folder": {
-			"name": "Labs1"
+			"name": "Labs2"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().FileName",
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@{dataset().EntityName}.csv",
 					"type": "Expression"
-				},
-				"folderPath": "Raw",
-				"fileSystem": "lakeroot"
+				}
 			},
 			"columnDelimiter": "\t",
 			"escapeChar": "\\",

@@ -531,7 +531,7 @@
         },
         {
           "source": {
-            "type": "Guid",
+            "type": "DateTime",
             "ordinal": 6
           },
           "sink": {
@@ -621,99 +621,6 @@
     }
   },
   {
-    "entityName": "ProductReview",
-    "translator": {
-      "type": "TabularTranslator",
-      "mappings": [
-        {
-          "source": {
-            "type": "Int32",
-            "ordinal": 1
-          },
-          "sink": {
-            "name": "ProductReviewID",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "Int32",
-            "ordinal": 2
-          },
-          "sink": {
-            "name": "ProductID",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "String",
-            "ordinal": 3
-          },
-          "sink": {
-            "name": "ReviewerName",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "DateTime",
-            "ordinal": 4
-          },
-          "sink": {
-            "name": "ReviewDate",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "String",
-            "ordinal": 5
-          },
-          "sink": {
-            "name": "EmailAddress",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "Int32",
-            "ordinal": 6
-          },
-          "sink": {
-            "name": "Rating",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "String",
-            "ordinal": 7
-          },
-          "sink": {
-            "name": "Comments",
-            "physicalType": "UTF8"
-          }
-        },
-        {
-          "source": {
-            "type": "DateTime",
-            "ordinal": 8
-          },
-          "sink": {
-            "name": "ModifiedDate",
-            "physicalType": "UTF8"
-          }
-        }
-      ],
-      "typeConversion": true,
-      "typeConversionSettings": {
-        "allowDataTruncation": true,
-        "treatBooleanAsNumber": false
-      }
-    }
-  },
-  {
     "entityName": "ProductSubcategory",
     "translator": {
       "type": "TabularTranslator",
@@ -762,6 +669,402 @@
           "source": {
             "type": "DateTime",
             "ordinal": 5
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "SalesOrderDetail",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "SalesOrderID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "SalesOrderDetailID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "CarrierTrackingNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "OrderQty",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "ProductID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 6
+          },
+          "sink": {
+            "name": "SpecialOfferID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 7
+          },
+          "sink": {
+            "name": "UnitPrice",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 8
+          },
+          "sink": {
+            "name": "UnitPriceDiscount",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 9
+          },
+          "sink": {
+            "name": "LineTotal",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 10
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 11
+          },
+          "sink": {
+            "name": "ModifiedDate",
+            "physicalType": "UTF8"
+          }
+        }
+      ],
+      "typeConversion": true,
+      "typeConversionSettings": {
+        "allowDataTruncation": true,
+        "treatBooleanAsNumber": false
+      }
+    }
+  },
+  {
+    "entityName": "SalesOrderHeader",
+    "translator": {
+      "type": "TabularTranslator",
+      "mappings": [
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 1
+          },
+          "sink": {
+            "name": "SalesOrderID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 2
+          },
+          "sink": {
+            "name": "RevisionNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 3
+          },
+          "sink": {
+            "name": "OrderDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 4
+          },
+          "sink": {
+            "name": "DueDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 5
+          },
+          "sink": {
+            "name": "ShipDate",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 6
+          },
+          "sink": {
+            "name": "Status",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 7
+          },
+          "sink": {
+            "name": "OnlineOrderFlag",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 8
+          },
+          "sink": {
+            "name": "SalesOrderNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 9
+          },
+          "sink": {
+            "name": "PurchaseOrderNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 10
+          },
+          "sink": {
+            "name": "AccountNumber",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 11
+          },
+          "sink": {
+            "name": "CustomerID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 12
+          },
+          "sink": {
+            "name": "SalesPersonID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 13
+          },
+          "sink": {
+            "name": "TerritoryID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 14
+          },
+          "sink": {
+            "name": "BillToAddressID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 15
+          },
+          "sink": {
+            "name": "ShipToAddressID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 16
+          },
+          "sink": {
+            "name": "ShipMethodID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 17
+          },
+          "sink": {
+            "name": "CreditCardID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 18
+          },
+          "sink": {
+            "name": "CreditCardApprovalCode",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Int32",
+            "ordinal": 19
+          },
+          "sink": {
+            "name": "CurrencyRateID",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 20
+          },
+          "sink": {
+            "name": "SubTotal",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 21
+          },
+          "sink": {
+            "name": "TaxAmt",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 22
+          },
+          "sink": {
+            "name": "Freight",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Decimal",
+            "ordinal": 23
+          },
+          "sink": {
+            "name": "TotalDue",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "String",
+            "ordinal": 24
+          },
+          "sink": {
+            "name": "Comment",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "Guid",
+            "ordinal": 25
+          },
+          "sink": {
+            "name": "rowguid",
+            "physicalType": "UTF8"
+          }
+        },
+        {
+          "source": {
+            "type": "DateTime",
+            "ordinal": 26
           },
           "sink": {
             "name": "ModifiedDate",
