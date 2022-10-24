@@ -10,6 +10,9 @@
 				"type": "string",
 				"value": "trainingkeys01"
 			}
+		},
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
 		}
 	},
 	"location": "uksouth",
