@@ -13,6 +13,267 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/MappingOrderAggregation')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "LakeFileOrderHeaderParquet",
+								"type": "DatasetReference"
+							},
+							"name": "OrderHeader"
+						},
+						{
+							"dataset": {
+								"referenceName": "LakeFileOrderDetailLinesParquet",
+								"type": "DatasetReference"
+							},
+							"name": "OrderLineDetails"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "TableOrderSummary",
+								"type": "DatasetReference"
+							},
+							"name": "OrderSummary"
+						}
+					],
+					"transformations": [
+						{
+							"name": "JoinHeaderToLineDetails"
+						},
+						{
+							"name": "OrderLineCount"
+						}
+					],
+					"script": "source(output(\n\t\tSalesOrderID as integer,\n\t\tRevisionNumber as integer,\n\t\tOrderDate as timestamp,\n\t\tDueDate as timestamp,\n\t\tShipDate as timestamp,\n\t\tStatus as integer,\n\t\tOnlineOrderFlag as boolean,\n\t\tSalesOrderNumber as string,\n\t\tPurchaseOrderNumber as string,\n\t\tAccountNumber as string,\n\t\tCustomerID as integer,\n\t\tShipToAddressID as integer,\n\t\tBillToAddressID as integer,\n\t\tShipMethod as string,\n\t\tCreditCardApprovalCode as string,\n\t\tSubTotal as decimal(19,4),\n\t\tTaxAmt as decimal(19,4),\n\t\tFreight as decimal(19,4),\n\t\tTotalDue as decimal(19,4),\n\t\tComment as string,\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderHeader\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tSalesOrderDetailID as integer,\n\t\tOrderQty as integer,\n\t\tProductID as integer,\n\t\tUnitPrice as decimal(19,4),\n\t\tUnitPriceDiscount as decimal(19,4),\n\t\tLineTotal as decimal(38,6),\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderLineDetails\nOrderHeader, OrderLineDetails join(OrderHeader@SalesOrderID == OrderLineDetails@SalesOrderID,\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tpartitionBy('hash', 1),\n\tbroadcast: 'both')~> JoinHeaderToLineDetails\nJoinHeaderToLineDetails aggregate(groupBy(SalesOrderNumber),\n\tRecordCount = count(SalesOrderDetailID),\n\tpartitionBy('roundRobin', 4)) ~> OrderLineCount\nOrderLineCount sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesOrderNumber as string,\n\t\tRecordCount as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesOrderNumber,\n\t\tRecordCount\n\t),\n\tpartitionBy('roundRobin', 4)) ~> OrderSummary"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MappingOrderAggregationWithParam')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "LakeFileOrderHeaderParquet",
+								"type": "DatasetReference"
+							},
+							"name": "OrderHeader"
+						},
+						{
+							"dataset": {
+								"referenceName": "LakeFileOrderDetailLinesParquet",
+								"type": "DatasetReference"
+							},
+							"name": "OrderLineDetails"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "TableOrderSummary",
+								"type": "DatasetReference"
+							},
+							"name": "OrderSummary"
+						}
+					],
+					"transformations": [
+						{
+							"name": "JoinHeaderToLineDetails"
+						},
+						{
+							"name": "OrderLineCount"
+						},
+						{
+							"name": "AddAuditColum"
+						}
+					],
+					"script": "parameters{\n\tAuditColumn as string\n}\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tRevisionNumber as integer,\n\t\tOrderDate as timestamp,\n\t\tDueDate as timestamp,\n\t\tShipDate as timestamp,\n\t\tStatus as integer,\n\t\tOnlineOrderFlag as boolean,\n\t\tSalesOrderNumber as string,\n\t\tPurchaseOrderNumber as string,\n\t\tAccountNumber as string,\n\t\tCustomerID as integer,\n\t\tShipToAddressID as integer,\n\t\tBillToAddressID as integer,\n\t\tShipMethod as string,\n\t\tCreditCardApprovalCode as string,\n\t\tSubTotal as decimal(19,4),\n\t\tTaxAmt as decimal(19,4),\n\t\tFreight as decimal(19,4),\n\t\tTotalDue as decimal(19,4),\n\t\tComment as string,\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderHeader\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tSalesOrderDetailID as integer,\n\t\tOrderQty as integer,\n\t\tProductID as integer,\n\t\tUnitPrice as decimal(19,4),\n\t\tUnitPriceDiscount as decimal(19,4),\n\t\tLineTotal as decimal(38,6),\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderLineDetails\nOrderHeader, OrderLineDetails join(OrderHeader@SalesOrderID == OrderLineDetails@SalesOrderID,\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tpartitionBy('hash', 1),\n\tbroadcast: 'both')~> JoinHeaderToLineDetails\nJoinHeaderToLineDetails aggregate(groupBy(SalesOrderNumber),\n\tRecordCount = count(SalesOrderDetailID),\n\tpartitionBy('roundRobin', 4)) ~> OrderLineCount\nOrderLineCount derive(AuditValue = $AuditColumn) ~> AddAuditColum\nAddAuditColum sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesOrderNumber as string,\n\t\tRecordCount as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesOrderNumber,\n\t\tRecordCount\n\t),\n\tpartitionBy('roundRobin', 4)) ~> OrderSummary"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UpdateProductDimension')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "Labs"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ADLS_TSV_AdventureWorks",
+								"type": "DatasetReference"
+							},
+							"name": "Product"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_TSV_AdventureWorks",
+								"type": "DatasetReference"
+							},
+							"name": "ProductSubcategory"
+						},
+						{
+							"dataset": {
+								"referenceName": "ADLS_TSV_AdventureWorks",
+								"type": "DatasetReference"
+							},
+							"name": "ProductCategory"
+						}
+					],
+					"sinks": [
+						{
+							"linkedService": {
+								"referenceName": "ADLS_saintegrationpipelines",
+								"type": "LinkedServiceReference"
+							},
+							"name": "WriteToDataLake"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectProductColumns"
+						},
+						{
+							"name": "SelectSubcategoryColumns"
+						},
+						{
+							"name": "SelectCategoryColumns"
+						},
+						{
+							"name": "LookupProductCategory"
+						},
+						{
+							"name": "LookupProductSubcategory"
+						},
+						{
+							"name": "RemoveDuplicateColumns"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          ProductId as integer,",
+						"          Product as string,",
+						"          {_col2_} as string,",
+						"          {_col3_} as boolean,",
+						"          {_col4_} as boolean,",
+						"          {_col5_} as string,",
+						"          {_col6_} as short,",
+						"          {_col7_} as short,",
+						"          {_col8_} as double,",
+						"          {_col9_} as double,",
+						"          {_col10_} as string,",
+						"          {_col11_} as string,",
+						"          {_col12_} as string,",
+						"          {_col13_} as double,",
+						"          {_col14_} as short,",
+						"          {_col15_} as string,",
+						"          {_col16_} as string,",
+						"          {_col17_} as string,",
+						"          SubcategoryId as integer,",
+						"          {_col19_} as short,",
+						"          {_col20_} as timestamp,",
+						"          {_col21_} as timestamp,",
+						"          {_col22_} as string,",
+						"          {_col23_} as string,",
+						"          {_col24_} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> Product",
+						"source(output(",
+						"          SubcategoryId as integer,",
+						"          CategoryId as integer,",
+						"          Subcategory as string,",
+						"          {_col3_} as string,",
+						"          {_col4_} as timestamp",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ProductSubcategory",
+						"source(output(",
+						"          CategoryId as integer,",
+						"          Category as string,",
+						"          {_col2_} as string,",
+						"          {_col3_} as timestamp",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ProductCategory",
+						"Product select(mapColumn(",
+						"          ProductId,",
+						"          Product,",
+						"          SubcategoryId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> SelectProductColumns",
+						"ProductSubcategory select(mapColumn(",
+						"          SubcategoryId,",
+						"          CategoryId,",
+						"          Subcategory",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> SelectSubcategoryColumns",
+						"ProductCategory select(mapColumn(",
+						"          CategoryId,",
+						"          Category",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> SelectCategoryColumns",
+						"SelectSubcategoryColumns, SelectCategoryColumns lookup(SelectSubcategoryColumns@CategoryId == SelectCategoryColumns@CategoryId,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> LookupProductCategory",
+						"SelectProductColumns, LookupProductCategory lookup(SelectProductColumns@SubcategoryId == SelectSubcategoryColumns@SubcategoryId,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> LookupProductSubcategory",
+						"LookupProductSubcategory select(mapColumn(",
+						"          ProductId,",
+						"          Product,",
+						"          SubcategoryId = SelectProductColumns@SubcategoryId,",
+						"          SubcategoryId = SelectSubcategoryColumns@SubcategoryId,",
+						"          CategoryId = SelectSubcategoryColumns@CategoryId,",
+						"          Subcategory,",
+						"          CategoryId = SelectCategoryColumns@CategoryId,",
+						"          Category",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> RemoveDuplicateColumns",
+						"RemoveDuplicateColumns sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'parquet',",
+						"     fileSystem: 'lakeroot',",
+						"     folderPath: 'Conformed/DimProduct',",
+						"     truncate: true,",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> WriteToDataLake"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/UpdateProductDimension_Sorted')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -227,7 +488,7 @@
 						}
 					},
 					{
-						"name": "Set Global Param",
+						"name": "Set Var From Global Param",
 						"type": "SetVariable",
 						"dependsOn": [
 							{
@@ -320,7 +581,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/UpdateProductDimension')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CopyAWEntities')]",
@@ -385,6 +648,68 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Order Summary with Mapping With Param')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Mapping Order Aggregation",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MappingOrderAggregationWithParam",
+								"type": "DataFlowReference",
+								"parameters": {
+									"AuditColumn": {
+										"value": "'@{pipeline().parameters.AuditColumnValue}'",
+										"type": "Expression"
+									}
+								},
+								"datasetParameters": {
+									"OrderHeader": {},
+									"OrderLineDetails": {},
+									"OrderSummary": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"AuditColumnValue": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Data Flows"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-02T14:13:15Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/MappingOrderAggregationWithParam')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Order Summary with Mapping')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -432,7 +757,9 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-02T14:13:15Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/MappingOrderAggregation')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Scale Out Level 1')]",

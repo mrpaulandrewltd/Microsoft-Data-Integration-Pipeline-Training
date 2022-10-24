@@ -13,6 +13,88 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/LakeFilePersonCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Person.csv",
+						"folderPath": "Landing",
+						"fileSystem": "datawarehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFiles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": "datawarehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LakeFilesBinary')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -376,7 +458,8 @@
 				"lastPublishTime": "2020-09-29T13:50:28Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/LaptopFilePersonCSV')]"
+				"[concat(variables('factoryId'), '/datasets/LaptopFilePersonCSV')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFilePersonCSV')]"
 			]
 		},
 		{
@@ -462,7 +545,8 @@
 				"lastPublishTime": "2020-08-27T09:06:46Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]"
+				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFiles')]"
 			]
 		},
 		{
@@ -608,7 +692,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/LaptopFolders')]",
-				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]"
+				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFiles')]"
 			]
 		},
 		{
@@ -1051,6 +1136,7 @@
 				"[concat(variables('factoryId'), '/datasets/LaptopFilesBinary')]",
 				"[concat(variables('factoryId'), '/datasets/LakeFilesBinary')]",
 				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFiles')]",
 				"[concat(variables('factoryId'), '/datasets/LaptopFilesParquet')]"
 			]
 		},
@@ -1640,221 +1726,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-08-24T13:41:19Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MappingOrderAggregation')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "LakeFileOrderHeaderParquet",
-								"type": "DatasetReference"
-							},
-							"name": "OrderHeader"
-						},
-						{
-							"dataset": {
-								"referenceName": "LakeFileOrderDetailLinesParquet",
-								"type": "DatasetReference"
-							},
-							"name": "OrderLineDetails"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "TableOrderSummary",
-								"type": "DatasetReference"
-							},
-							"name": "OrderSummary"
-						}
-					],
-					"transformations": [
-						{
-							"name": "JoinHeaderToLineDetails"
-						},
-						{
-							"name": "OrderLineCount"
-						}
-					],
-					"script": "source(output(\n\t\tSalesOrderID as integer,\n\t\tRevisionNumber as integer,\n\t\tOrderDate as timestamp,\n\t\tDueDate as timestamp,\n\t\tShipDate as timestamp,\n\t\tStatus as integer,\n\t\tOnlineOrderFlag as boolean,\n\t\tSalesOrderNumber as string,\n\t\tPurchaseOrderNumber as string,\n\t\tAccountNumber as string,\n\t\tCustomerID as integer,\n\t\tShipToAddressID as integer,\n\t\tBillToAddressID as integer,\n\t\tShipMethod as string,\n\t\tCreditCardApprovalCode as string,\n\t\tSubTotal as decimal(19,4),\n\t\tTaxAmt as decimal(19,4),\n\t\tFreight as decimal(19,4),\n\t\tTotalDue as decimal(19,4),\n\t\tComment as string,\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderHeader\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tSalesOrderDetailID as integer,\n\t\tOrderQty as integer,\n\t\tProductID as integer,\n\t\tUnitPrice as decimal(19,4),\n\t\tUnitPriceDiscount as decimal(19,4),\n\t\tLineTotal as decimal(38,6),\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderLineDetails\nOrderHeader, OrderLineDetails join(OrderHeader@SalesOrderID == OrderLineDetails@SalesOrderID,\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tpartitionBy('hash', 1),\n\tbroadcast: 'both')~> JoinHeaderToLineDetails\nJoinHeaderToLineDetails aggregate(groupBy(SalesOrderNumber),\n\tRecordCount = count(SalesOrderDetailID),\n\tpartitionBy('roundRobin', 4)) ~> OrderLineCount\nOrderLineCount sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesOrderNumber as string,\n\t\tRecordCount as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesOrderNumber,\n\t\tRecordCount\n\t),\n\tpartitionBy('roundRobin', 4)) ~> OrderSummary"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/TableOrderSummary')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UpdateProductDimension')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"folder": {
-					"name": "Labs"
-				},
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "ADLS_TSV_AdventureWorks",
-								"type": "DatasetReference"
-							},
-							"name": "Product"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_TSV_AdventureWorks",
-								"type": "DatasetReference"
-							},
-							"name": "ProductSubcategory"
-						},
-						{
-							"dataset": {
-								"referenceName": "ADLS_TSV_AdventureWorks",
-								"type": "DatasetReference"
-							},
-							"name": "ProductCategory"
-						}
-					],
-					"sinks": [
-						{
-							"linkedService": {
-								"referenceName": "ADLS_saintegrationpipelines",
-								"type": "LinkedServiceReference"
-							},
-							"name": "WriteToDataLake"
-						}
-					],
-					"transformations": [
-						{
-							"name": "SelectProductColumns"
-						},
-						{
-							"name": "SelectSubcategoryColumns"
-						},
-						{
-							"name": "SelectCategoryColumns"
-						},
-						{
-							"name": "LookupProductCategory"
-						},
-						{
-							"name": "LookupProductSubcategory"
-						},
-						{
-							"name": "RemoveDuplicateColumns"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          ProductId as integer,",
-						"          Product as string,",
-						"          {_col2_} as string,",
-						"          {_col3_} as boolean,",
-						"          {_col4_} as boolean,",
-						"          {_col5_} as string,",
-						"          {_col6_} as short,",
-						"          {_col7_} as short,",
-						"          {_col8_} as double,",
-						"          {_col9_} as double,",
-						"          {_col10_} as string,",
-						"          {_col11_} as string,",
-						"          {_col12_} as string,",
-						"          {_col13_} as double,",
-						"          {_col14_} as short,",
-						"          {_col15_} as string,",
-						"          {_col16_} as string,",
-						"          {_col17_} as string,",
-						"          SubcategoryId as integer,",
-						"          {_col19_} as short,",
-						"          {_col20_} as timestamp,",
-						"          {_col21_} as timestamp,",
-						"          {_col22_} as string,",
-						"          {_col23_} as string,",
-						"          {_col24_} as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> Product",
-						"source(output(",
-						"          SubcategoryId as integer,",
-						"          CategoryId as integer,",
-						"          Subcategory as string,",
-						"          {_col3_} as string,",
-						"          {_col4_} as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> ProductSubcategory",
-						"source(output(",
-						"          CategoryId as integer,",
-						"          Category as string,",
-						"          {_col2_} as string,",
-						"          {_col3_} as timestamp",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false) ~> ProductCategory",
-						"Product select(mapColumn(",
-						"          ProductId,",
-						"          Product,",
-						"          SubcategoryId",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> SelectProductColumns",
-						"ProductSubcategory select(mapColumn(",
-						"          SubcategoryId,",
-						"          CategoryId,",
-						"          Subcategory",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> SelectSubcategoryColumns",
-						"ProductCategory select(mapColumn(",
-						"          CategoryId,",
-						"          Category",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> SelectCategoryColumns",
-						"SelectSubcategoryColumns, SelectCategoryColumns lookup(SelectSubcategoryColumns@CategoryId == SelectCategoryColumns@CategoryId,",
-						"     multiple: false,",
-						"     pickup: 'any',",
-						"     broadcast: 'auto')~> LookupProductCategory",
-						"SelectProductColumns, LookupProductCategory lookup(SelectProductColumns@SubcategoryId == SelectSubcategoryColumns@SubcategoryId,",
-						"     multiple: false,",
-						"     pickup: 'any',",
-						"     broadcast: 'auto')~> LookupProductSubcategory",
-						"LookupProductSubcategory select(mapColumn(",
-						"          ProductId,",
-						"          Product,",
-						"          SubcategoryId = SelectProductColumns@SubcategoryId,",
-						"          SubcategoryId = SelectSubcategoryColumns@SubcategoryId,",
-						"          CategoryId = SelectSubcategoryColumns@CategoryId,",
-						"          Subcategory,",
-						"          CategoryId = SelectCategoryColumns@CategoryId,",
-						"          Category",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> RemoveDuplicateColumns",
-						"RemoveDuplicateColumns sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     format: 'parquet',",
-						"     fileSystem: 'lakeroot',",
-						"     folderPath: 'Conformed/DimProduct',",
-						"     truncate: true,",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> WriteToDataLake"
-					]
-				}
 			},
 			"dependsOn": []
 		}

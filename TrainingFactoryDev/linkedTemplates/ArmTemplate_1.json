@@ -71,6 +71,200 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/LakeFileOrderDetailLinesParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01noneKV",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "OrderDetailLines.parquet",
+						"folderPath": "Raw",
+						"fileSystem": "datawarehouse"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "SalesOrderID",
+						"type": "INT32"
+					},
+					{
+						"name": "SalesOrderDetailID",
+						"type": "INT32"
+					},
+					{
+						"name": "OrderQty",
+						"type": "INT32"
+					},
+					{
+						"name": "ProductID",
+						"type": "INT32"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "UnitPriceDiscount",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LineTotal",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 6
+					},
+					{
+						"name": "rowguid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFileOrderHeaderParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01noneKV",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "OrderHeader.parquet",
+						"folderPath": "Raw",
+						"fileSystem": "datawarehouse"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "SalesOrderID",
+						"type": "INT32"
+					},
+					{
+						"name": "RevisionNumber",
+						"type": "INT32"
+					},
+					{
+						"name": "OrderDate",
+						"type": "INT96"
+					},
+					{
+						"name": "DueDate",
+						"type": "INT96"
+					},
+					{
+						"name": "ShipDate",
+						"type": "INT96"
+					},
+					{
+						"name": "Status",
+						"type": "INT32"
+					},
+					{
+						"name": "OnlineOrderFlag",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "SalesOrderNumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "PurchaseOrderNumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "AccountNumber",
+						"type": "UTF8"
+					},
+					{
+						"name": "CustomerID",
+						"type": "INT32"
+					},
+					{
+						"name": "ShipToAddressID",
+						"type": "INT32"
+					},
+					{
+						"name": "BillToAddressID",
+						"type": "INT32"
+					},
+					{
+						"name": "ShipMethod",
+						"type": "UTF8"
+					},
+					{
+						"name": "CreditCardApprovalCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "SubTotal",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "TaxAmt",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "Freight",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "TotalDue",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "Comment",
+						"type": "UTF8"
+					},
+					{
+						"name": "rowguid",
+						"type": "UTF8"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "INT96"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_saintegrationpipelines')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -603,92 +797,6 @@
 						"fileSystem": "datawarehouse"
 					},
 					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/traininglake01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LakeFilePersonCSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "traininglake01",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Lake"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "Person.csv",
-						"folderPath": "Landing",
-						"fileSystem": "datawarehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/traininglake01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LakeFiles')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "traininglake01",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"Directory": {
-						"type": "string"
-					},
-					"File": {
-						"type": "string"
-					}
-				},
-				"folder": {
-					"name": "Lake"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().File",
-							"type": "Expression"
-						},
-						"folderPath": {
-							"value": "@dataset().Directory",
-							"type": "Expression"
-						},
-						"fileSystem": "datawarehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
 				},
 				"schema": []
 			},

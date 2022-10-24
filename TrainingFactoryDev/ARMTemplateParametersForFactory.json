@@ -8,6 +8,9 @@
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
+		"EmailSenderFunction_functionKey": {
+			"value": ""
+		},
 		"TrainingStore01_connectionString": {
 			"value": ""
 		},
@@ -37,6 +40,9 @@
 		},
 		"BatchForTraining01_properties_typeProperties_accountName": {
 			"value": "batchfortraining01"
+		},
+		"EmailSenderFunction_properties_typeProperties_functionAppUrl": {
+			"value": "https://frameworksupportfunctions.azurewebsites.net"
 		},
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"value": "@{linkedService().baseUrl}"

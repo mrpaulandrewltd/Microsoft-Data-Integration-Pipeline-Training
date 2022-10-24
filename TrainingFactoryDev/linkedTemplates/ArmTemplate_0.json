@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"EmailSenderFunction_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'EmailSenderFunction'"
+		},
 		"TrainingStore01_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrainingStore01'"
@@ -26,6 +30,10 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adayfullofadfsa.dfs.core.windows.net"
+		},
+		"EmailSenderFunction_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://frameworksupportfunctions.azurewebsites.net"
 		},
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -449,7 +457,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "Demo Pipelines/Misc"
+					"name": "Demo Pipelines/Scaling Out"
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-02-03T14:39:03Z"
@@ -463,12 +471,12 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Wait 15",
+						"name": "Wait 10",
 						"type": "Wait",
 						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
-							"waitTimeInSeconds": 15
+							"waitTimeInSeconds": 10
 						}
 					}
 				],
@@ -505,6 +513,24 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EmailSenderFunction')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFunction",
+				"typeProperties": {
+					"functionAppUrl": "[parameters('EmailSenderFunction_properties_typeProperties_functionAppUrl')]",
+					"functionKey": {
+						"type": "SecureString",
+						"value": "[parameters('EmailSenderFunction_functionKey')]"
+					},
+					"authentication": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -702,6 +728,67 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EmailSender')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Send Email",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SendEmail",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@concat('\n{\n\"emailRecipients\": \"',pipeline().parameters.Recipients,'\",\n\"emailSubject\": \"',pipeline().parameters.Subject,'\",\n\"emailBody\": \"',pipeline().parameters.Body,'\",\n\"emailImportance\": \"',pipeline().parameters.Importance,'\"\n}')",
+								"type": "Expression"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "EmailSenderFunction",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Recipients": {
+						"type": "string"
+					},
+					"Subject": {
+						"type": "string"
+					},
+					"Body": {
+						"type": "string"
+					},
+					"Importance": {
+						"type": "string",
+						"defaultValue": "High"
+					}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Misc"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EmailSenderFunction')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/HTTP_BIN_AWProduct')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -756,204 +843,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/HTTP_AWGitHub')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LakeFileOrderDetailLinesParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "traininglake01noneKV",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Lake"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "OrderDetailLines.parquet",
-						"folderPath": "Raw",
-						"fileSystem": "datawarehouse"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "SalesOrderID",
-						"type": "INT32"
-					},
-					{
-						"name": "SalesOrderDetailID",
-						"type": "INT32"
-					},
-					{
-						"name": "OrderQty",
-						"type": "INT32"
-					},
-					{
-						"name": "ProductID",
-						"type": "INT32"
-					},
-					{
-						"name": "UnitPrice",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "UnitPriceDiscount",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "LineTotal",
-						"type": "DECIMAL",
-						"precision": 38,
-						"scale": 6
-					},
-					{
-						"name": "rowguid",
-						"type": "UTF8"
-					},
-					{
-						"name": "ModifiedDate",
-						"type": "INT96"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/traininglake01noneKV')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LakeFileOrderHeaderParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "traininglake01noneKV",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Lake"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "OrderHeader.parquet",
-						"folderPath": "Raw",
-						"fileSystem": "datawarehouse"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "SalesOrderID",
-						"type": "INT32"
-					},
-					{
-						"name": "RevisionNumber",
-						"type": "INT32"
-					},
-					{
-						"name": "OrderDate",
-						"type": "INT96"
-					},
-					{
-						"name": "DueDate",
-						"type": "INT96"
-					},
-					{
-						"name": "ShipDate",
-						"type": "INT96"
-					},
-					{
-						"name": "Status",
-						"type": "INT32"
-					},
-					{
-						"name": "OnlineOrderFlag",
-						"type": "BOOLEAN"
-					},
-					{
-						"name": "SalesOrderNumber",
-						"type": "UTF8"
-					},
-					{
-						"name": "PurchaseOrderNumber",
-						"type": "UTF8"
-					},
-					{
-						"name": "AccountNumber",
-						"type": "UTF8"
-					},
-					{
-						"name": "CustomerID",
-						"type": "INT32"
-					},
-					{
-						"name": "ShipToAddressID",
-						"type": "INT32"
-					},
-					{
-						"name": "BillToAddressID",
-						"type": "INT32"
-					},
-					{
-						"name": "ShipMethod",
-						"type": "UTF8"
-					},
-					{
-						"name": "CreditCardApprovalCode",
-						"type": "UTF8"
-					},
-					{
-						"name": "SubTotal",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "TaxAmt",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "Freight",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "TotalDue",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "Comment",
-						"type": "UTF8"
-					},
-					{
-						"name": "rowguid",
-						"type": "UTF8"
-					},
-					{
-						"name": "ModifiedDate",
-						"type": "INT96"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/traininglake01noneKV')]"
 			]
 		}
 	]

@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"EmailSenderFunction_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'EmailSenderFunction'"
+		},
 		"TrainingStore01_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrainingStore01'"
@@ -50,6 +54,10 @@
 		"BatchForTraining01_properties_typeProperties_accountName": {
 			"type": "string",
 			"defaultValue": "batchfortraining01"
+		},
+		"EmailSenderFunction_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://frameworksupportfunctions.azurewebsites.net"
 		},
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -996,7 +1004,7 @@
 						}
 					},
 					{
-						"name": "Set Global Param",
+						"name": "Set Var From Global Param",
 						"type": "SetVariable",
 						"dependsOn": [
 							{
@@ -1415,7 +1423,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "Demo Pipelines/Misc"
+					"name": "Demo Pipelines/Scaling Out"
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-02-03T14:39:03Z"
@@ -1745,6 +1753,67 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EmailSender')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Send Email",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SendEmail",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@concat('\n{\n\"emailRecipients\": \"',pipeline().parameters.Recipients,'\",\n\"emailSubject\": \"',pipeline().parameters.Subject,'\",\n\"emailBody\": \"',pipeline().parameters.Body,'\",\n\"emailImportance\": \"',pipeline().parameters.Importance,'\"\n}')",
+								"type": "Expression"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "EmailSenderFunction",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Recipients": {
+						"type": "string"
+					},
+					"Subject": {
+						"type": "string"
+					},
+					"Body": {
+						"type": "string"
+					},
+					"Importance": {
+						"type": "string",
+						"defaultValue": "High"
+					}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Misc"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/EmailSenderFunction')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Get Key Vault Value')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2029,6 +2098,68 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AnyDatabaseTable')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Order Summary with Mapping With Param')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Mapping Order Aggregation",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MappingOrderAggregationWithParam",
+								"type": "DataFlowReference",
+								"parameters": {
+									"AuditColumn": {
+										"value": "'@{pipeline().parameters.AuditColumnValue}'",
+										"type": "Expression"
+									}
+								},
+								"datasetParameters": {
+									"OrderHeader": {},
+									"OrderLineDetails": {},
+									"OrderSummary": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"AuditColumnValue": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Demo Pipelines/Data Flows"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-02T14:13:15Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/MappingOrderAggregationWithParam')]"
 			]
 		},
 		{
@@ -2388,12 +2519,12 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Wait 15",
+						"name": "Wait 10",
 						"type": "Wait",
 						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
-							"waitTimeInSeconds": 15
+							"waitTimeInSeconds": 10
 						}
 					}
 				],
@@ -3433,6 +3564,24 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EmailSenderFunction')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFunction",
+				"typeProperties": {
+					"functionAppUrl": "[parameters('EmailSenderFunction_properties_typeProperties_functionAppUrl')]",
+					"functionKey": {
+						"type": "SecureString",
+						"value": "[parameters('EmailSenderFunction_functionKey')]"
+					},
+					"authentication": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GenericKeys')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -3765,6 +3914,58 @@
 						}
 					],
 					"script": "source(output(\n\t\tSalesOrderID as integer,\n\t\tRevisionNumber as integer,\n\t\tOrderDate as timestamp,\n\t\tDueDate as timestamp,\n\t\tShipDate as timestamp,\n\t\tStatus as integer,\n\t\tOnlineOrderFlag as boolean,\n\t\tSalesOrderNumber as string,\n\t\tPurchaseOrderNumber as string,\n\t\tAccountNumber as string,\n\t\tCustomerID as integer,\n\t\tShipToAddressID as integer,\n\t\tBillToAddressID as integer,\n\t\tShipMethod as string,\n\t\tCreditCardApprovalCode as string,\n\t\tSubTotal as decimal(19,4),\n\t\tTaxAmt as decimal(19,4),\n\t\tFreight as decimal(19,4),\n\t\tTotalDue as decimal(19,4),\n\t\tComment as string,\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderHeader\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tSalesOrderDetailID as integer,\n\t\tOrderQty as integer,\n\t\tProductID as integer,\n\t\tUnitPrice as decimal(19,4),\n\t\tUnitPriceDiscount as decimal(19,4),\n\t\tLineTotal as decimal(38,6),\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderLineDetails\nOrderHeader, OrderLineDetails join(OrderHeader@SalesOrderID == OrderLineDetails@SalesOrderID,\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tpartitionBy('hash', 1),\n\tbroadcast: 'both')~> JoinHeaderToLineDetails\nJoinHeaderToLineDetails aggregate(groupBy(SalesOrderNumber),\n\tRecordCount = count(SalesOrderDetailID),\n\tpartitionBy('roundRobin', 4)) ~> OrderLineCount\nOrderLineCount sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesOrderNumber as string,\n\t\tRecordCount as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesOrderNumber,\n\t\tRecordCount\n\t),\n\tpartitionBy('roundRobin', 4)) ~> OrderSummary"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/LakeFileOrderHeaderParquet')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFileOrderDetailLinesParquet')]",
+				"[concat(variables('factoryId'), '/datasets/TableOrderSummary')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MappingOrderAggregationWithParam')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "LakeFileOrderHeaderParquet",
+								"type": "DatasetReference"
+							},
+							"name": "OrderHeader"
+						},
+						{
+							"dataset": {
+								"referenceName": "LakeFileOrderDetailLinesParquet",
+								"type": "DatasetReference"
+							},
+							"name": "OrderLineDetails"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "TableOrderSummary",
+								"type": "DatasetReference"
+							},
+							"name": "OrderSummary"
+						}
+					],
+					"transformations": [
+						{
+							"name": "JoinHeaderToLineDetails"
+						},
+						{
+							"name": "OrderLineCount"
+						},
+						{
+							"name": "AddAuditColum"
+						}
+					],
+					"script": "parameters{\n\tAuditColumn as string\n}\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tRevisionNumber as integer,\n\t\tOrderDate as timestamp,\n\t\tDueDate as timestamp,\n\t\tShipDate as timestamp,\n\t\tStatus as integer,\n\t\tOnlineOrderFlag as boolean,\n\t\tSalesOrderNumber as string,\n\t\tPurchaseOrderNumber as string,\n\t\tAccountNumber as string,\n\t\tCustomerID as integer,\n\t\tShipToAddressID as integer,\n\t\tBillToAddressID as integer,\n\t\tShipMethod as string,\n\t\tCreditCardApprovalCode as string,\n\t\tSubTotal as decimal(19,4),\n\t\tTaxAmt as decimal(19,4),\n\t\tFreight as decimal(19,4),\n\t\tTotalDue as decimal(19,4),\n\t\tComment as string,\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderHeader\nsource(output(\n\t\tSalesOrderID as integer,\n\t\tSalesOrderDetailID as integer,\n\t\tOrderQty as integer,\n\t\tProductID as integer,\n\t\tUnitPrice as decimal(19,4),\n\t\tUnitPriceDiscount as decimal(19,4),\n\t\tLineTotal as decimal(38,6),\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet',\n\tpartitionBy('hash', 1)) ~> OrderLineDetails\nOrderHeader, OrderLineDetails join(OrderHeader@SalesOrderID == OrderLineDetails@SalesOrderID,\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tpartitionBy('hash', 1),\n\tbroadcast: 'both')~> JoinHeaderToLineDetails\nJoinHeaderToLineDetails aggregate(groupBy(SalesOrderNumber),\n\tRecordCount = count(SalesOrderDetailID),\n\tpartitionBy('roundRobin', 4)) ~> OrderLineCount\nOrderLineCount derive(AuditValue = $AuditColumn) ~> AddAuditColum\nAddAuditColum sink(allowSchemaDrift: false,\n\tvalidateSchema: false,\n\tinput(\n\t\tSalesOrderNumber as string,\n\t\tRecordCount as integer\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError',\n\tmapColumn(\n\t\tSalesOrderNumber,\n\t\tRecordCount\n\t),\n\tpartitionBy('roundRobin', 4)) ~> OrderSummary"
 				}
 			},
 			"dependsOn": [

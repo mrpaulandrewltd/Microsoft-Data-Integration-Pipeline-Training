@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
+		"EmailSenderFunction_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'EmailSenderFunction'"
+		},
 		"TrainingStore01_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TrainingStore01'"
@@ -50,6 +54,10 @@
 		"BatchForTraining01_properties_typeProperties_accountName": {
 			"type": "string",
 			"defaultValue": "batchfortraining01"
+		},
+		"EmailSenderFunction_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://frameworksupportfunctions.azurewebsites.net"
 		},
 		"GenericKeys_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -154,6 +162,9 @@
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
+					"EmailSenderFunction_functionKey": {
+						"value": "[parameters('EmailSenderFunction_functionKey')]"
+					},
 					"TrainingStore01_connectionString": {
 						"value": "[parameters('TrainingStore01_connectionString')]"
 					},
@@ -165,6 +176,9 @@
 					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"EmailSenderFunction_properties_typeProperties_functionAppUrl": {
+						"value": "[parameters('EmailSenderFunction_properties_typeProperties_functionAppUrl')]"
 					},
 					"GenericKeys_properties_typeProperties_baseUrl": {
 						"value": "[parameters('GenericKeys_properties_typeProperties_baseUrl')]"
