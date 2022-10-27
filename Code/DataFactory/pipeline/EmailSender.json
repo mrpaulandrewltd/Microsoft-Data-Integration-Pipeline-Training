@@ -1,0 +1,51 @@
+{
+	"name": "EmailSender",
+	"properties": {
+		"activities": [
+			{
+				"name": "Send Email",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SendEmail",
+					"method": "POST",
+					"body": {
+						"value": "@concat('\n{\n\"emailRecipients\": \"',pipeline().parameters.Recipients,'\",\n\"emailSubject\": \"',pipeline().parameters.Subject,'\",\n\"emailBody\": \"',pipeline().parameters.Body,'\",\n\"emailImportance\": \"',pipeline().parameters.Importance,'\"\n}')",
+						"type": "Expression"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "EmailSenderFunction",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"Recipients": {
+				"type": "string"
+			},
+			"Subject": {
+				"type": "string"
+			},
+			"Body": {
+				"type": "string"
+			},
+			"Importance": {
+				"type": "string",
+				"defaultValue": "High"
+			}
+		},
+		"folder": {
+			"name": "Demo Pipelines/Misc"
+		},
+		"annotations": []
+	}
+}

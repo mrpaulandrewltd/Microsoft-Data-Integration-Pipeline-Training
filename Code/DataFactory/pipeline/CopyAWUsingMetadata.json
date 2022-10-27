@@ -1,0 +1,170 @@
+{
+	"name": "CopyAWUsingMetadata",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get catalog",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://raw.githubusercontent.com/mrpaulandrewltd/Azure-Data-Integration-Pipeline-Training/main/Labs/TableCatalog.json",
+					"method": "GET"
+				}
+			},
+			{
+				"name": "Cache catalog as JSON array",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get catalog",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Catalog",
+					"value": {
+						"value": "@json(activity('Get catalog').output.Response)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "ForEach AW entity",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Cache catalog as JSON array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('Catalog')",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy AW entity",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"value": "@item().translator",
+									"type": "Expression"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "HTTP_TSV_AdventureWorks",
+									"type": "DatasetReference",
+									"parameters": {
+										"EntityName": {
+											"value": "@item().EntityName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_PQT_AdventureWorks",
+									"type": "DatasetReference",
+									"parameters": {
+										"EntityName": {
+											"value": "@item().EntityName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Notify error",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [
+								{
+									"activity": "Copy AW entity",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "SendEmail",
+								"method": "POST",
+								"body": {
+									"value": "{\n    \"emailRecipients\": \"richard.swinbank@gmail.com\",\n    \"emailSubject\": \"Error copying @{item().EntityName}\",\n    \"emailBody\": \"@{replace(activity('Copy AW entity').output.errors[0].Message,'\"','\\\"')}\"\n}",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "EmailSenderFunction",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"Catalog": {
+				"type": "Array",
+				"defaultValue": []
+			}
+		},
+		"folder": {
+			"name": "Labs2"
+		},
+		"annotations": []
+	}
+}
