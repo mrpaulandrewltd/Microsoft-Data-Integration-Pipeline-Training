@@ -1,6 +1,5 @@
 {
 	"name": "LaptopFiles",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "FileServer",
@@ -17,8 +16,9 @@
 			}
 		},
 		"connectVia": {
-			"referenceName": "PaulsLaptopIR",
+			"referenceName": "Laptop",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
