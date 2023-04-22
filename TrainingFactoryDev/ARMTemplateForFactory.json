@@ -107,16 +107,13 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
 		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+		"AzureFunctionTest_properties_privateLinkResourceId": {
 			"type": "string",
-			"defaultValue": "adayfullofadf-sql.database.windows.net"
+			"defaultValue": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/ADF.procfwk/providers/Microsoft.Web/sites/FrameworkSupportFunctions"
 		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+		"AzureFunctionTest_properties_groupId": {
 			"type": "string",
-			"defaultValue": "sql-admin"
-		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-			"type": "secureString"
+			"defaultValue": "sites"
 		},
 		"AzureKeyVault1_properties_privateLinkResourceId": {
 			"type": "string",
@@ -1480,7 +1477,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": []
 			},
@@ -1544,7 +1541,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": []
 			},
@@ -1625,7 +1622,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": []
 			},
@@ -1692,13 +1689,196 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/HTTP_BIN_AWProduct')]",
 				"[concat(variables('factoryId'), '/datasets/ADLS_BIN_AWProduct')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyAWUsingMetadata')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get catalog",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://raw.githubusercontent.com/mrpaulandrewltd/Azure-Data-Integration-Pipeline-Training/main/Labs/TableCatalog.json",
+							"method": "GET",
+							"headers": {}
+						}
+					},
+					{
+						"name": "Cache catalog as JSON array",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get catalog",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "Catalog",
+							"value": {
+								"value": "@json(activity('Get catalog').output.Response)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "ForEach AW entity",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Cache catalog as JSON array",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@variables('Catalog')",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy AW entity",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"value": "@item().translator",
+											"type": "Expression"
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "HTTP_TSV_AdventureWorks",
+											"type": "DatasetReference",
+											"parameters": {
+												"EntityName": {
+													"value": "@item().EntityName",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ADLS_PQT_AdventureWorks",
+											"type": "DatasetReference",
+											"parameters": {
+												"EntityName": {
+													"value": "@item().EntityName",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								},
+								{
+									"name": "Notify error",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [
+										{
+											"activity": "Copy AW entity",
+											"dependencyConditions": [
+												"Failed"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "SendEmail",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "{\n    \"emailRecipients\": \"paul@mrpaulandrew.com\",\n    \"emailSubject\": \"Error copying @{item().EntityName}\",\n    \"emailBody\": \"@{replace(activity('Copy AW entity').output.errors[0].Message,'\"','\\\"')}\"\n}",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "EmailSenderFunction",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"Catalog": {
+						"type": "Array",
+						"defaultValue": []
+					}
+				},
+				"folder": {
+					"name": "Labs2"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/HTTP_TSV_AdventureWorks')]",
+				"[concat(variables('factoryId'), '/datasets/ADLS_PQT_AdventureWorks')]",
+				"[concat(variables('factoryId'), '/linkedServices/EmailSenderFunction')]"
 			]
 		},
 		{
@@ -2549,7 +2729,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -2581,7 +2761,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -2602,6 +2782,43 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_PQT_AdventureWorks')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_saintegrationpipelines",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"EntityName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Labs2"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@{dataset().EntityName}.parquet",
+							"type": "Expression"
+						},
+						"folderPath": "Raw",
+						"fileSystem": "lakeroot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_saintegrationpipelines')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_TSV_AdventureWorks')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2616,7 +2833,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -2772,7 +2989,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -2801,7 +3018,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -2814,6 +3031,43 @@
 						}
 					}
 				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HTTP_AWGitHub')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HTTP_TSV_AdventureWorks')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HTTP_AWGitHub",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"EntityName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Labs2"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@{dataset().EntityName}.csv",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": "\t",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/HTTP_AWGitHub')]"
@@ -3650,12 +3904,12 @@
 					}
 				},
 				"connectVia": {
-					"referenceName": "PaulsLaptopIR",
+					"referenceName": "Laptop",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/PaulsLaptopIR')]",
+				"[concat(variables('factoryId'), '/integrationRuntimes/Laptop')]",
 				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
 			]
 		},
@@ -3784,6 +4038,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 15,
+						"startTime": "2023-02-06T14:56:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ForDataFlowDemos')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -3812,36 +4086,6 @@
 					"linkedInfo": {
 						"resourceId": "[parameters('PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId')]",
 						"authorizationType": "Rbac"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SSISIntegrationRuntime')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "UK South",
-						"nodeSize": "Standard_D2_v3",
-						"numberOfNodes": 1,
-						"maxParallelExecutionsPerNode": 2
-					},
-					"ssisProperties": {
-						"catalogInfo": {
-							"catalogServerEndpoint": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]",
-							"catalogAdminUserName": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]",
-							"catalogAdminPassword": {
-								"type": "SecureString",
-								"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
-							},
-							"catalogPricingTier": "S1"
-						},
-						"edition": "Standard",
-						"licenseType": "LicenseIncluded"
 					}
 				}
 			},
@@ -4364,6 +4608,18 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/default/AzureFunctionTest')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"privateLinkResourceId": "[parameters('AzureFunctionTest_properties_privateLinkResourceId')]",
+				"groupId": "[parameters('AzureFunctionTest_properties_groupId')]"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/default/AzureKeyVault1')]",
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
 			"apiVersion": "2018-06-01",
@@ -4375,6 +4631,16 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Laptop')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
 		}
 	]
 }

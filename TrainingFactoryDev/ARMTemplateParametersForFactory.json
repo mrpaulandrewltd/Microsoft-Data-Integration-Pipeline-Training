@@ -80,14 +80,11 @@
 		"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
 			"value": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
 		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
-			"value": "adayfullofadf-sql.database.windows.net"
+		"AzureFunctionTest_properties_privateLinkResourceId": {
+			"value": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/ADF.procfwk/providers/Microsoft.Web/sites/FrameworkSupportFunctions"
 		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
-			"value": "sql-admin"
-		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-			"value": ""
+		"AzureFunctionTest_properties_groupId": {
+			"value": "sites"
 		},
 		"AzureKeyVault1_properties_privateLinkResourceId": {
 			"value": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/Training/providers/Microsoft.KeyVault/vaults/TrainingKeys01"

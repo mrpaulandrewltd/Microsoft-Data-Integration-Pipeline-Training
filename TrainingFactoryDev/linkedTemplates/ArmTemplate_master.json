@@ -107,16 +107,13 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
 		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+		"AzureFunctionTest_properties_privateLinkResourceId": {
 			"type": "string",
-			"defaultValue": "adayfullofadf-sql.database.windows.net"
+			"defaultValue": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/ADF.procfwk/providers/Microsoft.Web/sites/FrameworkSupportFunctions"
 		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+		"AzureFunctionTest_properties_groupId": {
 			"type": "string",
-			"defaultValue": "sql-admin"
-		},
-		"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-			"type": "secureString"
+			"defaultValue": "sites"
 		},
 		"AzureKeyVault1_properties_privateLinkResourceId": {
 			"type": "string",
@@ -200,15 +197,6 @@
 					},
 					"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
 						"value": "[parameters('PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId')]"
-					},
-					"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
-						"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
-					},
-					"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
-						"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
-					},
-					"SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-						"value": "[parameters('SSISIntegrationRuntime_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 					}
 				}
 			},
@@ -260,6 +248,12 @@
 					},
 					"traininglake01_properties_typeProperties_url": {
 						"value": "[parameters('traininglake01_properties_typeProperties_url')]"
+					},
+					"AzureFunctionTest_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureFunctionTest_properties_privateLinkResourceId')]"
+					},
+					"AzureFunctionTest_properties_groupId": {
+						"value": "[parameters('AzureFunctionTest_properties_groupId')]"
 					},
 					"AzureKeyVault1_properties_privateLinkResourceId": {
 						"value": "[parameters('AzureKeyVault1_properties_privateLinkResourceId')]"

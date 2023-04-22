@@ -51,6 +51,14 @@
 			"type": "string",
 			"defaultValue": "https://traininglake01.dfs.core.windows.net"
 		},
+		"AzureFunctionTest_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/ADF.procfwk/providers/Microsoft.Web/sites/FrameworkSupportFunctions"
+		},
+		"AzureFunctionTest_properties_groupId": {
+			"type": "string",
+			"defaultValue": "sites"
+		},
 		"AzureKeyVault1_properties_privateLinkResourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/Training/providers/Microsoft.KeyVault/vaults/TrainingKeys01"
@@ -70,6 +78,72 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/HTTP_BIN_AdventureWorks')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HTTP_AWGitHub",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Entity": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Labs1"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@{dataset().Entity}.csv",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HTTP_TSV_AdventureWorks')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HTTP_AWGitHub",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"EntityName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Labs2"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@{dataset().EntityName}.csv",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": "\t",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LakeFileOrderDetailLinesParquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -389,7 +463,7 @@
 					}
 				},
 				"connectVia": {
-					"referenceName": "PaulsLaptopIR",
+					"referenceName": "Laptop",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
@@ -478,6 +552,16 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/default/AzureFunctionTest')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"privateLinkResourceId": "[parameters('AzureFunctionTest_properties_privateLinkResourceId')]",
+				"groupId": "[parameters('AzureFunctionTest_properties_groupId')]"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/default/AzureKeyVault1')]",
 			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
 			"apiVersion": "2018-06-01",
@@ -548,7 +632,7 @@
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -580,7 +664,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "Binary",
@@ -601,6 +685,43 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_PQT_AdventureWorks')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_saintegrationpipelines",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"EntityName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Labs2"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@{dataset().EntityName}.parquet",
+							"type": "Expression"
+						},
+						"folderPath": "Raw",
+						"fileSystem": "lakeroot"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_saintegrationpipelines')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_TSV_AdventureWorks')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -615,7 +736,7 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -637,171 +758,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ADLS_saintegrationpipelines')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AnyDatabaseTable')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AnyDatabaseConnection",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"DBConnectionSecret": {
-							"value": "@dataset().LinkedServiceConnectionSecret",
-							"type": "Expression"
-						}
-					}
-				},
-				"parameters": {
-					"LinkedServiceConnectionSecret": {
-						"type": "string"
-					},
-					"SchemaName": {
-						"type": "string"
-					},
-					"TableName": {
-						"type": "string"
-					}
-				},
-				"folder": {
-					"name": "SQLDB"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().SchemaName",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AnyDatabaseConnection')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AnyDatabaseTableAnyKeyVault')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AnyDatabaseConnectionFromAnyKeyVault",
-					"type": "LinkedServiceReference",
-					"parameters": {
-						"KeyVaultURL": {
-							"value": "@dataset().KeyVaultURL",
-							"type": "Expression"
-						},
-						"KeyVaultSecretName": {
-							"value": "@dataset().LinkedServiceConnectionSecret",
-							"type": "Expression"
-						}
-					}
-				},
-				"parameters": {
-					"LinkedServiceConnectionSecret": {
-						"type": "string"
-					},
-					"SchemaName": {
-						"type": "string"
-					},
-					"TableName": {
-						"type": "string"
-					},
-					"KeyVaultURL": {
-						"type": "string"
-					}
-				},
-				"folder": {
-					"name": "SQLDB"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().SchemaName",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AnyDatabaseConnectionFromAnyKeyVault')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GetSetMetadata')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "trainingdb01",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "SQLDB"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/trainingdb01')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LakeFileParquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "traininglake01",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"Directory": {
-						"type": "string"
-					},
-					"File": {
-						"type": "string"
-					}
-				},
-				"folder": {
-					"name": "Lake"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().File",
-							"type": "Expression"
-						},
-						"folderPath": {
-							"value": "@dataset().Directory",
-							"type": "Expression"
-						},
-						"fileSystem": "datawarehouse"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/traininglake01')]"
 			]
 		}
 	]

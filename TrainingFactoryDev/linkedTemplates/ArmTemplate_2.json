@@ -13,6 +13,163 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AnyDatabaseTable')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AnyDatabaseConnection",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"DBConnectionSecret": {
+							"value": "@dataset().LinkedServiceConnectionSecret",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"LinkedServiceConnectionSecret": {
+						"type": "string"
+					},
+					"SchemaName": {
+						"type": "string"
+					},
+					"TableName": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "SQLDB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().SchemaName",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AnyDatabaseTableAnyKeyVault')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AnyDatabaseConnectionFromAnyKeyVault",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"KeyVaultURL": {
+							"value": "@dataset().KeyVaultURL",
+							"type": "Expression"
+						},
+						"KeyVaultSecretName": {
+							"value": "@dataset().LinkedServiceConnectionSecret",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"LinkedServiceConnectionSecret": {
+						"type": "string"
+					},
+					"SchemaName": {
+						"type": "string"
+					},
+					"TableName": {
+						"type": "string"
+					},
+					"KeyVaultURL": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "SQLDB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().SchemaName",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().TableName",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GetSetMetadata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "trainingdb01",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SQLDB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LakeFileParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "traininglake01",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string"
+					},
+					"File": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "Lake"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().File",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Directory",
+							"type": "Expression"
+						},
+						"fileSystem": "datawarehouse"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/LakeFilePersonCSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1133,11 +1290,13 @@
 				"lastPublishTime": "2020-09-02T14:13:14Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/GetSetMetadata')]",
 				"[concat(variables('factoryId'), '/datasets/LaptopFilesBinary')]",
 				"[concat(variables('factoryId'), '/datasets/LakeFilesBinary')]",
 				"[concat(variables('factoryId'), '/datasets/LaptopsFiles')]",
 				"[concat(variables('factoryId'), '/datasets/LakeFiles')]",
-				"[concat(variables('factoryId'), '/datasets/LaptopFilesParquet')]"
+				"[concat(variables('factoryId'), '/datasets/LaptopFilesParquet')]",
+				"[concat(variables('factoryId'), '/datasets/LakeFileParquet')]"
 			]
 		},
 		{
@@ -1197,7 +1356,9 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-02T14:13:14Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/GetSetMetadata')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CopyAWEntity')]",
@@ -1272,460 +1433,9 @@
 					}
 				},
 				"folder": {
-					"name": "Labs"
+					"name": "Labs1"
 				},
 				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyAWProduct')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy AW Products to data lake",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "HttpReadSettings",
-									"requestMethod": "GET"
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "HTTP_BIN_AWProduct",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "ADLS_BIN_AWProduct",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "Labs"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Get Key Vault Value')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Secret",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Set Key URL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": {
-								"value": "@variables('CompleteSecretURL')",
-								"type": "Expression"
-							},
-							"method": "GET",
-							"headers": {},
-							"authentication": {
-								"type": "MSI",
-								"resource": "https://vault.azure.net"
-							}
-						}
-					},
-					{
-						"name": "Set Key URL",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "CompleteSecretURL",
-							"value": {
-								"value": "@concat(\n'https://',\npipeline().globalParameters.KeyVaultName,\n'.vault.azure.net/secrets/',\npipeline().parameters.SecretName,\n'?api-version=7.0')",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Nested Key Vault URL",
-						"type": "Lookup",
-						"dependsOn": [
-							{
-								"activity": "Get Secret",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "AnyDatabaseTableAnyKeyVault",
-								"type": "DatasetReference",
-								"parameters": {
-									"LinkedServiceConnectionSecret": "ConnectionString-trainingdb01",
-									"SchemaName": "sys",
-									"TableName": "objects",
-									"KeyVaultURL": {
-										"value": "@concat('https://',pipeline().globalParameters.KeyVaultName,'.vault.azure.net/')",
-										"type": "Expression"
-									}
-								}
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"parameters": {
-					"SecretName": {
-						"type": "string",
-						"defaultValue": "DemoKeyGetWithWebActivity"
-					}
-				},
-				"variables": {
-					"CompleteSecretURL": {
-						"type": "String"
-					}
-				},
-				"folder": {
-					"name": "Demo Pipelines/Misc"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Lazy Replication')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Table List",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": {
-									"value": "@pipeline().parameters.TableLookupQuery",
-									"type": "Expression"
-								},
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "AnyDatabaseTable",
-								"type": "DatasetReference",
-								"parameters": {
-									"LinkedServiceConnectionSecret": {
-										"value": "@pipeline().parameters.SourceConnectionSecret",
-										"type": "Expression"
-									},
-									"SchemaName": "sys",
-									"TableName": "objects"
-								}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "Copy Tables",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Get Table List",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Table List').output.value",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Copy Table",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"sink": {
-											"type": "AzureSqlSink",
-											"preCopyScript": {
-												"value": "IF OBJECT_ID('@{item().SchemaName}.@{item().TableName}') IS NOT NULL TRUNCATE TABLE @{item().SchemaName}.@{item().TableName}",
-												"type": "Expression"
-											},
-											"tableOption": "autoCreate",
-											"disableMetricsCollection": false
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "AnyDatabaseTable",
-											"type": "DatasetReference",
-											"parameters": {
-												"LinkedServiceConnectionSecret": {
-													"value": "@pipeline().parameters.SourceConnectionSecret",
-													"type": "Expression"
-												},
-												"SchemaName": {
-													"value": "@item().SchemaName",
-													"type": "Expression"
-												},
-												"TableName": {
-													"value": "@item().TableName",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "AnyDatabaseTable",
-											"type": "DatasetReference",
-											"parameters": {
-												"LinkedServiceConnectionSecret": {
-													"value": "@pipeline().parameters.TargetConnectionSecret",
-													"type": "Expression"
-												},
-												"SchemaName": {
-													"value": "@item().SchemaName",
-													"type": "Expression"
-												},
-												"TableName": {
-													"value": "@item().TableName",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"parameters": {
-					"SourceConnectionSecret": {
-						"type": "string",
-						"defaultValue": "ConnectionString-trainingdb01"
-					},
-					"TargetConnectionSecret": {
-						"type": "string",
-						"defaultValue": "ConnectionString-trainingdb02"
-					},
-					"TableLookupQuery": {
-						"type": "string",
-						"defaultValue": "SELECT \ts.name AS SchemaName, \to.name AS TableName FROM  \tsys.objects o \tINNER JOIN sys.schemas s \t\tON o.schema_id = s.schema_id WHERE  \to.[type] = 'U'"
-					}
-				},
-				"folder": {
-					"name": "Demo Pipelines/Dynamic Linked Services"
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-08-27T09:43:42Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Scale Out Level 2')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Bucket Contents",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[GetBucketContents]",
-								"storedProcedureParameters": {
-									"BucketId": {
-										"type": "Int32",
-										"value": {
-											"value": "@pipeline().parameters.BucketId",
-											"type": "Expression"
-										}
-									}
-								},
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "GetSetMetadata",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "Execute Processes",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "Get Bucket Contents",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Bucket Contents').output.value",
-								"type": "Expression"
-							},
-							"batchCount": 50,
-							"activities": [
-								{
-									"name": "Run Process",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": {
-											"value": "@concat('[workers].[DumpDataAndWait',item().ProcessId,']')",
-											"type": "Expression"
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "trainingdb01",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"parameters": {
-					"BucketId": {
-						"type": "int"
-					}
-				},
-				"folder": {
-					"name": "Demo Pipelines/Scaling Out"
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-08-24T13:41:19Z"
 			},
 			"dependsOn": []
 		}
