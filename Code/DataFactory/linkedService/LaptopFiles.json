@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"host": "C:\\ADFRoot\\",
 			"userId": "ADFIRUser",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhYTA4YmZjYy1hZDc2LTRlNTAtYjE2Ny1kZTQzNTM3NmY5MDMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwMmY1MGNmZC04MmVhLTRiY2YtYmI3ZC1hZjNkMzYyODNjMjEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "Laptop",
