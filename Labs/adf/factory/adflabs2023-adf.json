@@ -1,0 +1,9 @@
+{
+	"name": "adflabs2023-adf",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b9cd3fd6-9668-41f7-ae62-413b409b5f58",
+		"tenantId": "2cdc9c7e-334f-4f88-9de8-a844761a49b6"
+	}
+}
