@@ -1,17 +1,24 @@
 {
 	"name": "LaptopFiles",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
-			"host": "C:\\ADFRoot\\",
+			"host": "C:\\",
 			"userId": "WINAP71rY2YabRV\\ADFIRUser",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmYTA1MjJhOS0zYjUyLTQ0ZjYtYWUzOS02NmI4ZDEwMjdmY2IiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "TrainingKeys01",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ADFIRUser"
+			}
 		},
 		"connectVia": {
 			"referenceName": "Laptop",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
