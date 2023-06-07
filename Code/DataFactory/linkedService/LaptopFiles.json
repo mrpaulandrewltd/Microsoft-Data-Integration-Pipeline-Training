@@ -6,8 +6,8 @@
 		"type": "FileServer",
 		"typeProperties": {
 			"host": "C:\\ADFRoot\\",
-			"userId": "ADFIRUser",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlNTU0MWQ1Mi00NWZkLTQxZmMtOGU0Mi0wZjJkNjA3OThkNmEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"userId": "WINAP71rY2YabRV\\ADFIRUser",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmYTA1MjJhOS0zYjUyLTQ0ZjYtYWUzOS02NmI4ZDEwMjdmY2IiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "Laptop",
