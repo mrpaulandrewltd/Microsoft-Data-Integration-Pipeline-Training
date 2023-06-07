@@ -1,0 +1,23 @@
+{
+	"name": "ADLS_BIN_AWProduct",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Lab2"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Product.csv",
+				"folderPath": "Raw",
+				"fileSystem": "lakeroot"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
