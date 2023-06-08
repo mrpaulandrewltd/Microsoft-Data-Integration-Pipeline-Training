@@ -5,19 +5,12 @@
 		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
-			"host": "C:\\ADFRoot\\",
-			"userId": "ADFIRUser",
-			"password": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "TrainingKeys01",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "ADFIRUser"
-			}
+			"host": "C:\\ADFRoot",
+			"userId": "paul.andrew@avanade.com",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzMDg5NjgxZi05MmM0LTQzMzAtYjMzYy02ZTdhNjA3ZWUxZTkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "PaulsLaptopIR",
+			"referenceName": "Laptop",
 			"type": "IntegrationRuntimeReference"
 		}
 	}

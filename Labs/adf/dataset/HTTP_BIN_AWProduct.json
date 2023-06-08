@@ -1,0 +1,20 @@
+{
+	"name": "HTTP_BIN_AWProduct",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HTTP_AWProduct",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Lab2"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

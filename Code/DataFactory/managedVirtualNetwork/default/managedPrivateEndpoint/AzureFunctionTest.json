@@ -1,0 +1,7 @@
+{
+	"name": "AzureFunctionTest",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/450eaf4d-1124-4b6d-b490-95dedc991c1e/resourceGroups/ADF.procfwk/providers/Microsoft.Web/sites/FrameworkSupportFunctions",
+		"groupId": "sites"
+	}
+}
