@@ -85,6 +85,37 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "Get Secret List",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Set Key URL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://',\npipeline().globalParameters.KeyVaultName,\n'.vault.azure.net/secrets?api-version=7.4')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
 			}
 		],
 		"parameters": {
