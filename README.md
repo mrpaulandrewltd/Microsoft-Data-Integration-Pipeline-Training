@@ -1,4 +1,4 @@
-# __Microsoft Data Integration Pipeline Training
+# Microsoft Data Integration Pipeline Training
 ## The Fundamentals to Level 300
 ### _with Paul Andrew_
 
@@ -28,7 +28,7 @@ The following offers an insight into the complete agenda and module breakdown fo
 
 * __Module 1:__ Pipeline Fundamentals - [Slides PDF >>>](.Content/Module%201.pdf)
   * The History of Azure Orchestration
-  * Synapse Analytics vs Data Factory
+  * Synapse Analytics vs Data Factory vs Microsoft Fabric
   * Integration Components
   * Common Activities
   * Execution Dependencies
