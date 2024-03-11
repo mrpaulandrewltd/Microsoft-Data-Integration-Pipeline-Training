@@ -1,27 +1,142 @@
-# Azure Data Integration Pipeline Training
-## _with Paul Andrew_
+# __Microsoft Data Integration Pipeline Training
+## The Fundamentals to Level 300
+### _with Paul Andrew_
 
 ![Slide Header](./Images/ReadMe%20Header.png)
 
-Hey friends and welcome to my training workshops on __Azure Data Integration Pipelines__. 
+Hey friends and welcome to my training workshop on __Microsoft Data Integration Pipelines__. 
 
-Over the coming hours or days (depending on your chosen workshop) we will be all becoming pipeline workers!... And I completely recommend this description when describing your job to non-technical family members. But be warned, if you go on to tell them that the factory of pipes is in the cloud for orchestration and integration you are likely to be branded as crazy. However, here and now that is ok. You are amongst like-minded geeky friends that all want to become cloud pipeline workers that doing data plumbing with data pipes as well :-)
+## Overview
 
-On a more serious note, throughout our day of training you will quickly notice, like with most technologies, there are an awful lot of different ways you can implement Azure orchestration services and understanding the best way to do something is often the biggest challenge. That said, if you only take away one thing from this training, I will ask that you have an appreciation of this fact; in depends! Then when delivering solutions you take a step back from the requirements and think about the overall technical design and how Azure Integration Pipelines should fit into your platform as a core component.
-
-All too often with new and sh iny services we start playing around then try to make the technology fit our solution. Rather than thinking about the solution requirements and which technology meets our needs. This is true of all developers, I don't want to preach, so am simply asking that we take a growth mindset. Think about the outputs and the requirements as a goal.
+In this full day of training, we’ll start with the very basics and learn how to orchestrate your Azure data platform from start to finish. You will learn how to build out Azure control flow and data flow components as processing pipelines using Azure Data Factory and Azure Synapse Analytics. We’ll start by covering the fundamentals within the resources and together build out pipelines that ingest data from local source systems, transform and serve it to consumers. We’ll then continue taking an end-to-end look at our Azure integration pipeline tools within highly scalable cloud native architectures, dealing with triggering, monitoring, dynamic pipeline content as well as CI/CD practices. Start the day knowing nothing about Azure Data Integration pipelines and leave with the knowledge, slides, demos, and code to apply these resources in your role as a data engineering professional.
 ___
 
-## Workshops 
+## Objectives
 
- 1. [A Day of Fundamentals - 1 Day](./Content/01.%20A%20Day%20of%20Fundamentals%20-%201%20Day/01.%20Agenda.md)
- 2. [Fundamentals to Level 300 - 1 Day](./Content/02.%20Fundamentals%20to%20Level%20300%20-%201%20Day/02.%20Agenda.md)
- 3. [Advanced Design & Delivery - 1 Day](./Content/03.%20Advanced%20Design%20%26%20Delivery%20-%201%20Day/03.%20Agenda.md)
- 4. [Advanced Design & Delivery (A Deep Dive) - 2 Day](./Content/04.%20Advanced%20Design%20%26%20Delivery%20(A%20Deep%20Dive)%20-%202%20Day/04.%20Agenda.md)
- 5. [Zero to Level 401 - 3 Day](./Content/05.%20Zero%20to%20Level%20401%20-%203%20Day/05.%20Agenda.md)
+* How cloud native data integration resources have evolved over time.
+* What the basic data pipeline artifacts are.
+* What the common data movement deployment patterns are.
+* How to build complex, high dynamic control flows.
+* How to massively scale out executions and handle parallel orchestration workloads.
+* Best practices for the deployment of orchestration resources.
+
 ___
 
-## Prerequisites
+## Agenda
+
+The following offers an insight into the complete agenda and module breakdown for this workshop.
+
+* __Module 1:__ Pipeline Fundamentals - [Slides PDF >>>](.Content/Module%201.pdf)
+  * The History of Azure Orchestration
+  * Synapse Analytics vs Data Factory
+  * Integration Components
+  * Common Activities
+  * Execution Dependencies
+
+___
+
+* __Module 2:__ Integration Runtime Design Patterns - [Slides PDF >>>](.Content/Module%202.pdf)
+  * Compute Types
+    * Azure
+    * Hosted
+    * SSIS
+  * Patterns & Configuration
+
+___
+
+* __Module 3:__ Data Transformation - [Slides PDF >>>](.Content/Module%203.pdf)
+  * Data Flows
+  * Power Query Injection
+  * Spark Configuration
+  * Use Cases
+
+___
+
+* __Labs:__ [Getting Hands On](https://github.com/mrpaulandrewltd/Azure-Data-Integration-Pipeline-Training/tree/main/Labs)
+  * Create Azure Resources
+  * Build a Copy Pipeline
+  * Create a Reusable Pipeline
+  * Author a Data Flow
+  * Monitor Factory Activities
+  * Explore Synapse Pipelines
+  * Explore Fabric Pipelines
+  * Mini-project
+
+
+___
+
+* __Module 4:__ Dynamic Pipelines - [Slides PDF >>>](.Content/Module%204.pdf)
+  * Expressions & Interpolation
+  * Simple Metadata Driven Execution
+  * Dynamic Content Chains
+  * Reference Names
+
+___
+
+* __Module 5:__ Pipeline Extensibility - [Slides PDF >>>](.Content/Module%205.pdf)
+  * Azure Batch Service
+    * Tasks
+    * Compute Pools
+    * Scaling
+  * Pipeline Custom Activities
+  * Azure Management API
+  * Azure Functions 
+
+___
+
+* __Module 6:__ Execution Parallelism - [Slides PDF >>>](.Content/Module%206.pdf)
+  * Control Flow Scale Out
+  * Concurrency Limitations
+  * Internal vs External Activities
+  * Orchestration Framework - See Cloud Formations: [CF.Cumulus](https://www.cloudformations.org/cumulus?utm_source=pa&utm_medium=github&utm_campaign=cumulus&utm_content=l2)
+
+___
+
+* __Module 7:__ VNet Integration - [Slides PDF >>>](.Content/Module%207.pdf)
+  * Private Endpoints
+  * Managed VNet's
+  * Firewall Bypass
+
+___
+
+* __Module 8:__ Security - [Slides PDF >>>](.Content/Module%208.pdf)
+  * Service Principals
+  * Managed Identities
+  * Azure Key Vault Integration
+  * Customer Managed Keys
+  * Pipeline Access & Permissions
+
+___
+
+* __Module 9:__ Monitoring & Alerting - [Slides PDF >>>](.Content/Module%209.pdf)
+    * Studio Monitoring
+    * Log Analytics & Kusto Queries
+    * Operational Dashboards
+    * Advanced Alerting
+
+___
+
+* __Module 10:__ Solution Testing - [Slides PDF >>>](.Content/Module%2010.pdf)
+    * Development Time Validation
+    * Test Coverage
+    * NUnit Tests
+
+___
+
+* __Module 11:__ CI/CD - [Slides PDF >>>](.Content/Module%2011.pdf)
+    * Source Control vs Developer UI
+    * Basic ARM Template Deployments
+    * Advanced Deployment Patterns
+
+___
+
+* __Module 12:__ Final Thoughts - [Slides PDF >>>](.Content/Module%2012.pdf)
+  * Running Costs
+  * Conclusions
+  * Best Practices
+___
+
+## Suggested Prerequisites
 
 If participating in any of these training workshop there will be labs to work through and demo code to optionally participate in. These labs will focus on the development of Azure data platform resources, it is therefore recommended that you bring the following ready to use. There will be little spare time for initial setup work.
 
@@ -46,7 +161,10 @@ ___
 
 ## Speaker Biography
 
-Paul Andrew is a Microsoft Data Platform MVP and Technical Architect within the Avanade Centre of Excellence team, with over 15 years' experience in the industry, working as an engineer and solution architect. Day-to-day Paul is accountable for delivering enterprise grade data insights to international organisations where he wields the complete stack of Azure Data Platform resources. Paul leads delivery teams around the globe implementing the latest design patterns, creating architectural innovations, and defining best practice to ensure technical excellence for customers across a wide variety of industry verticals. Paul is passionate about technology, which is demonstrated in the community, he speaks at events and shares his knowledge gained from real world experience through his blog. Paul maintains the view that his job is also his hobby and doesn't ever want to take his fingers off the developers keyboard while maintaining a growth mindset.
+Paul (AKA @mrpaulandrew) is the Founder & CTO of Cloud Formations, a specialist data consultancy based in the UK. With nearly 20 years’ experience designing and delivering Microsoft data architectures, Paul leads a passionate team of engineers, supporting businesses small and large with scalable cloud platforms. Business value delivered through data insights. Over the years, Paul has covered the breadth and depth of design patterns and industry leading concepts, including Lambda, Kappa, Delta Lake, Data Mesh and Data Fabric.
+
+Paul is also a Microsoft Data Platform MVP, organiser for the Data Relay community conference, East Midlands user group leader, book author and mentor. In addition to the day job(s), Paul is a father of three, husband, foodie, runner, blood donor, geek, Lego, and Star Wars fan! Lastly, Paul confesses to enjoying a Ramstein playlist when given half a chance to do some coding for a customer project.
+
 
 ## Speaker Contact Details
 
