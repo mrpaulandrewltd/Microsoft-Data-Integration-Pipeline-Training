@@ -16,7 +16,7 @@
 			}
 		},
 		"connectVia": {
-			"referenceName": "Laptop",
+			"referenceName": "PaulsLaptop",
 			"type": "IntegrationRuntimeReference"
 		}
 	},
