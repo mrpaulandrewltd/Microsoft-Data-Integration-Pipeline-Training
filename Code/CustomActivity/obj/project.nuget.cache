@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "f0p4CwgurPXk2v0yD5sG6nLAvje2rr5wHxFdncruLvsOGiK3Q2I9TnSpBC64Z+fnkevGX0xQTI2XPAbWzSUW3A==",
+  "dgSpecHash": "MS//Q2ra597QX5BZPl/I5gMUuaE8tXpSDDU77WKixx7s8Odz6QMSfn2KNGDJ6Xk5o2wa2ysXWhNagNIAWxkh/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\paul.andrew\\GitHub\\Azure-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\PaulAndrew\\Documents\\GitHub\\Microsoft-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PaulAndrew\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\PaulAndrew\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\PaulAndrew\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\PaulAndrew\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
   "logs": []
 }
