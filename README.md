@@ -26,7 +26,7 @@ ___
 
 The following offers an insight into the complete agenda and module breakdown for this workshop.
 
-* __Module 1:__ Pipeline Fundamentals - [Slides PDF >>>](.Content/Module%201.pdf)
+* __Module 1:__ Pipeline Fundamentals - [Slides PDF >>>](/Content/Module%201%20-%20Pipeline%20Fundamentals.pdf)
   * The History of Azure Orchestration
   * Synapse Analytics vs Data Factory vs Microsoft Fabric
   * Integration Components
@@ -35,7 +35,7 @@ The following offers an insight into the complete agenda and module breakdown fo
 
 ___
 
-* __Module 2:__ Integration Runtime Design Patterns - [Slides PDF >>>](.Content/Module%202.pdf)
+* __Module 2:__ Integration Runtime Design Patterns - [Slides PDF >>>](/Content/Module%202%20-%20Integration%20Runtimes.pdf)
   * Compute Types
     * Azure
     * Hosted
@@ -44,7 +44,7 @@ ___
 
 ___
 
-* __Module 3:__ Data Transformation - [Slides PDF >>>](.Content/Module%203.pdf)
+* __Module 3:__ Data Transformation - [Slides PDF >>>](/Content/Module%203%20-%20Data%20Transformations.pdf)
   * Data Flows
   * Power Query Injection
   * Spark Configuration
@@ -65,7 +65,7 @@ ___
 
 ___
 
-* __Module 4:__ Dynamic Pipelines - [Slides PDF >>>](.Content/Module%204.pdf)
+* __Module 4:__ Dynamic Pipelines - [Slides PDF >>>](/Content/Module%204%20-%20Dynamic%20Pipelines.pdf)
   * Expressions & Interpolation
   * Simple Metadata Driven Execution
   * Dynamic Content Chains
@@ -73,7 +73,7 @@ ___
 
 ___
 
-* __Module 5:__ Pipeline Extensibility - [Slides PDF >>>](.Content/Module%205.pdf)
+* __Module 5:__ Pipeline Extensibility - [Slides PDF >>>](/Content/Module%205%20-%20Pipeline%20Extensibility.pdf)
   * Azure Batch Service
     * Tasks
     * Compute Pools
@@ -84,7 +84,7 @@ ___
 
 ___
 
-* __Module 6:__ Execution Parallelism - [Slides PDF >>>](.Content/Module%206.pdf)
+* __Module 6:__ Execution Parallelism - [Slides PDF >>>](/Content/Module%206%20-%20Execution%20Parallelism.pdf)
   * Control Flow Scale Out
   * Concurrency Limitations
   * Internal vs External Activities
@@ -92,14 +92,14 @@ ___
 
 ___
 
-* __Module 7:__ VNet Integration - [Slides PDF >>>](.Content/Module%207.pdf)
+* __Module 7:__ VNet Integration - [Slides PDF >>>](/Content/Module%207%20-%20VNet%20Integration.pdf)
   * Private Endpoints
   * Managed VNet's
   * Firewall Bypass
 
 ___
 
-* __Module 8:__ Security - [Slides PDF >>>](.Content/Module%208.pdf)
+* __Module 8:__ Security - [Slides PDF >>>](/Content/Module%208%20-%20Security.pdf)
   * Service Principals
   * Managed Identities
   * Azure Key Vault Integration
@@ -108,7 +108,7 @@ ___
 
 ___
 
-* __Module 9:__ Monitoring & Alerting - [Slides PDF >>>](.Content/Module%209.pdf)
+* __Module 9:__ Monitoring & Alerting - [Slides PDF >>>](/Content/Module%209%20-%20Monitoring%20&%20Alerting.pdf)
     * Studio Monitoring
     * Log Analytics & Kusto Queries
     * Operational Dashboards
@@ -116,21 +116,21 @@ ___
 
 ___
 
-* __Module 10:__ Solution Testing - [Slides PDF >>>](.Content/Module%2010.pdf)
+* __Module 10:__ Solution Testing - [Slides PDF >>>](/Content/Module%209%20-%20Monitoring%20&%20Alerting.pdf)
     * Development Time Validation
     * Test Coverage
     * NUnit Tests
 
 ___
 
-* __Module 11:__ CI/CD - [Slides PDF >>>](.Content/Module%2011.pdf)
+* __Module 11:__ CI/CD - [Slides PDF >>>](/Content/Module%2011%20-%20CI%20CD.pdf)
     * Source Control vs Developer UI
     * Basic ARM Template Deployments
     * Advanced Deployment Patterns
 
 ___
 
-* __Module 12:__ Final Thoughts - [Slides PDF >>>](.Content/Module%2012.pdf)
+* __Module 12:__ Final Thoughts - [Slides PDF >>>](/Content/Module%2012%20-%20Final%20Thoughts.pdf)
   * Running Costs
   * Conclusions
   * Best Practices
