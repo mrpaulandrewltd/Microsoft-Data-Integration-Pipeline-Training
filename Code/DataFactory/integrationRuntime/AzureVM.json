@@ -1,6 +1,0 @@
-{
-	"name": "AzureVM",
-	"properties": {
-		"type": "SelfHosted"
-	}
-}
