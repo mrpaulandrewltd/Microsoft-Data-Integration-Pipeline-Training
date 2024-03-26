@@ -49,7 +49,7 @@
 		},
 		"BatchForTraining01_properties_typeProperties_poolName": {
 			"type": "string",
-			"defaultValue": "09a2ec47-0cc8-4492-935c-04852e3ec654"
+			"defaultValue": "09a2ec47-0cc8-4492-935c-04852e3ec652"
 		},
 		"BatchForTraining01_properties_typeProperties_accountName": {
 			"type": "string",
@@ -102,10 +102,6 @@
 		"traininglake01noneKV_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://traininglake01.dfs.core.windows.net"
-		},
-		"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
 		},
 		"AzureFunctionTest_properties_privateLinkResourceId": {
 			"type": "string",
@@ -194,9 +190,6 @@
 					},
 					"traininglake01noneKV_properties_typeProperties_url": {
 						"value": "[parameters('traininglake01noneKV_properties_typeProperties_url')]"
-					},
-					"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
-						"value": "[parameters('PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId')]"
 					}
 				}
 			},

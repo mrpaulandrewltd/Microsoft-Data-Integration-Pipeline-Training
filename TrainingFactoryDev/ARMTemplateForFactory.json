@@ -49,7 +49,7 @@
 		},
 		"BatchForTraining01_properties_typeProperties_poolName": {
 			"type": "string",
-			"defaultValue": "09a2ec47-0cc8-4492-935c-04852e3ec654"
+			"defaultValue": "09a2ec47-0cc8-4492-935c-04852e3ec652"
 		},
 		"BatchForTraining01_properties_typeProperties_accountName": {
 			"type": "string",
@@ -102,10 +102,6 @@
 		"traininglake01noneKV_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://traininglake01.dfs.core.windows.net"
-		},
-		"PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/77a3e40b-dd36-433c-90ca-a09f39724af3/resourcegroups/CommunityDemos/providers/Microsoft.DataFactory/factories/PaulsFunFactoryV2/integrationruntimes/WINAP71rY2YabRV"
 		},
 		"AzureFunctionTest_properties_privateLinkResourceId": {
 			"type": "string",
@@ -202,8 +198,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Data Uploads"
@@ -289,8 +284,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Data Uploads"
@@ -435,8 +429,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Data Uploads"
@@ -872,8 +865,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"DemoVariable": {
@@ -935,8 +927,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"GetFileQuery": {
@@ -968,6 +959,9 @@
 						"name": "06 - Get Any File List",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
+						"policy": {
+							"secureInput": false
+						},
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -991,6 +985,10 @@
 								]
 							}
 						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
 						"userProperties": [],
 						"typeProperties": {
 							"variableName": "WorkerOutput",
@@ -1011,6 +1009,10 @@
 								]
 							}
 						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
 						"userProperties": [],
 						"typeProperties": {
 							"variableName": "GlobalParam",
@@ -1022,8 +1024,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"WorkerOutput": {
@@ -1416,8 +1417,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Scaling Out"
@@ -1473,8 +1473,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Labs1"
@@ -1507,6 +1506,9 @@
 									"name": "Execute CopyAWEntity",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
@@ -1527,8 +1529,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"Entities": {
@@ -1613,8 +1614,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"Entity": {
@@ -1685,8 +1685,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Labs1"
@@ -1717,9 +1716,9 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://raw.githubusercontent.com/mrpaulandrewltd/Azure-Data-Integration-Pipeline-Training/main/Labs/TableCatalog.json",
 							"method": "GET",
-							"headers": {}
+							"headers": {},
+							"url": "https://raw.githubusercontent.com/mrpaulandrewltd/Azure-Data-Integration-Pipeline-Training/main/Labs/TableCatalog.json"
 						}
 					},
 					{
@@ -1733,6 +1732,10 @@
 								]
 							}
 						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
 						"userProperties": [],
 						"typeProperties": {
 							"variableName": "Catalog",
@@ -1861,8 +1864,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"Catalog": {
@@ -1918,8 +1920,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Misc"
@@ -1966,8 +1967,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"Recipients": {
@@ -2019,12 +2019,12 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
+							"method": "GET",
+							"headers": {},
 							"url": {
 								"value": "@variables('CompleteSecretURL')",
 								"type": "Expression"
 							},
-							"method": "GET",
-							"headers": {},
 							"authentication": {
 								"type": "MSI",
 								"resource": "https://vault.azure.net"
@@ -2035,6 +2035,10 @@
 						"name": "Set Key URL",
 						"type": "SetVariable",
 						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
 						"userProperties": [],
 						"typeProperties": {
 							"variableName": "CompleteSecretURL",
@@ -2083,11 +2087,42 @@
 								}
 							}
 						}
+					},
+					{
+						"name": "Get Secret List",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Set Key URL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "GET",
+							"headers": {},
+							"url": {
+								"value": "@concat('https://',\npipeline().globalParameters.KeyVaultName,\n'.vault.azure.net/secrets?api-version=7.4')",
+								"type": "Expression"
+							},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://vault.azure.net"
+							}
+						}
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"SecretName": {
@@ -2253,8 +2288,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"SourceConnectionSecret": {
@@ -2324,8 +2358,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"AuditColumnValue": {
@@ -2381,8 +2414,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Data Flows"
@@ -2463,6 +2495,9 @@
 									"name": "Call Level 2",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
@@ -2570,8 +2605,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Scaling Out"
@@ -2673,8 +2707,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"BucketId": {
@@ -2709,8 +2742,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"folder": {
 					"name": "Demo Pipelines/Misc"
@@ -3904,12 +3936,12 @@
 					}
 				},
 				"connectVia": {
-					"referenceName": "Laptop",
+					"referenceName": "PaulsLaptop",
 					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/Laptop')]",
+				"[concat(variables('factoryId'), '/integrationRuntimes/PaulsLaptop')]",
 				"[concat(variables('factoryId'), '/linkedServices/TrainingKeys01')]"
 			]
 		},
@@ -4058,6 +4090,16 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureVM')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ForDataFlowDemos')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -4077,17 +4119,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PaulsLaptopIR')]",
+			"name": "[concat(parameters('factoryName'), '/PaulsLaptop')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"type": "SelfHosted",
-				"typeProperties": {
-					"linkedInfo": {
-						"resourceId": "[parameters('PaulsLaptopIR_properties_typeProperties_linkedInfo_resourceId')]",
-						"authorizationType": "Rbac"
-					}
-				}
+				"typeProperties": {}
 			},
 			"dependsOn": []
 		},
@@ -4631,16 +4668,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Laptop')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
 		}
 	]
 }
