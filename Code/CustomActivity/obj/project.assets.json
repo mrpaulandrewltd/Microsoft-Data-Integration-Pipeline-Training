@@ -9,24 +9,27 @@
   },
   "packageFolders": {
     "C:\\Users\\PaulAndrew\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PaulAndrew\\Documents\\GitHub\\Microsoft-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
+      "projectUniqueName": "D:\\GitHub\\Azure-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
       "projectName": "CustomActivity",
-      "projectPath": "C:\\Users\\PaulAndrew\\Documents\\GitHub\\Microsoft-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
+      "projectPath": "D:\\GitHub\\Azure-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\CustomActivity.csproj",
       "packagesPath": "C:\\Users\\PaulAndrew\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PaulAndrew\\Documents\\GitHub\\Microsoft-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\obj\\",
+      "outputPath": "D:\\GitHub\\Azure-Data-Integration-Pipeline-Training\\Code\\CustomActivity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
         "C:\\Users\\PaulAndrew\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -67,30 +70,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.10, 3.1.10]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.32, 3.1.32]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[3.1.0, 3.1.0]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
       }
     }
   }
